@@ -27,10 +27,15 @@ export default function NavigationBar() {
     >
       <Logo />
       <NavigationLinks links={links} active={active} setActive={setActive} />
-      <div className="flex flex-row">
+      <div className="lg:flex hidden flex-row">
         <Theme />
       </div>
-      <HamburgerMenu links={links} active={active} setActive={setActive} />
+      <div
+      className="lg:hidden flex items-center absolute right-2 gap-0.5 md:gap-1.5"
+      >
+        <Theme/>
+        <HamburgerMenu links={links} active={active} setActive={setActive} />
+      </div>
     </header>
   );
 }
