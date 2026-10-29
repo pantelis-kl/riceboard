@@ -30,6 +30,7 @@ export default function Theme() {
     const root = document.documentElement;
     if (root.classList.contains("dark")) {
       root.classList.remove("dark");
+      localStorage.setItem("theme","light")
       setDark(false);
     } else {
       root.classList.add("dark");
