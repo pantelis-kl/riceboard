@@ -2,12 +2,16 @@
 
 @layer base{
   :root{
-   --bg-primary: #fafafb
-   --bg-navbar: #ffffffcc
+   --bg-primary: #fafafb;
+   --bg-navbar: #ffffffcc;
+   --text-primary: #18181b;
+   --accent-primary:#6d28d9;
 }
 
 .dark{
-  --bg-primary: #0b0f17
-  --bg-navbar:#0b0f17cc
+  --bg-primary: #0b0f17;
+  --bg-navbar:#0b0f17cc;
+  --text-primary: #f4f4f5;
+  --accent-primary:#a78bfa;
 }
 }
