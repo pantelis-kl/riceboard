@@ -18,7 +18,7 @@ export default function NavigationLinks() {
   ];
   return (
     <>
-      <HamburgerMenu links={links} />
+      <HamburgerMenu links={links} active={active} setActive={setActive}/>
       <div className="hidden lg:flex flex-row gap-8 text-sm font-medium">
         {links.map((link, index) => (
           <Link
@@ -33,7 +33,7 @@ export default function NavigationLinks() {
           >
             {link.name}
             <span
-              className={`absolute bottom-0 left-0 h-0.5 bg-[#6d28d9] transition-all duration-300 ease-out ${
+              className={`absolute bottom-0 left-0 h-0.5 bg-(--accent-primary) transition-all duration-300 ease-out ${
                 active === index ? "w-full" : "w-0 group-hover:w-full"
               }`}
             />
