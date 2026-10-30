@@ -1,14 +1,13 @@
 "use client";
 //import Link
 import Link from "next/link";
-
 //import types
 import { Dispatch, SetStateAction } from "react";
 
 type NavigationLinksProps = {
   links: LinksProps[];
-  active: number;
-  setActive: Dispatch<SetStateAction<number>>;
+  active: string | null;
+  setActive: Dispatch<SetStateAction<string | null>>
 };
 
 type LinksProps = {
@@ -23,13 +22,13 @@ export default function NavigationLinks({
 }: NavigationLinksProps) {
   return (
     <div className="hidden lg:flex p-2 flex-row gap-8 text-sm xl:text-[16px] font-medium">
-      {links.map((link, index) => (
+      {links.map((link) => (
         <Link
           key={link.href}
           href={link.href}
-          onClick={() => setActive(index)}
+          onClick={() => setActive(link.href)}
           className={`relative py-1 transition-colors duration-200 ${
-            active === index
+            active === link.href
               ? "text-(--text-primary) font-semibold"
               : "text-(--text-secondary) hover:text-(--text-primary)"
           } group`}
@@ -37,7 +36,7 @@ export default function NavigationLinks({
           {link.name}
           <span
             className={`absolute bottom-0 left-0 h-0.5 bg-(--accent-primary) transition-all duration-300 ease-out ${
-              active === index ? "w-full" : "w-0 group-hover:w-full"
+              active === link.href ? "w-full" : "w-0 group-hover:w-full"
             }`}
           />
         </Link>

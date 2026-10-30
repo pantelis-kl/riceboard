@@ -5,6 +5,7 @@ import { Menu, X } from "lucide-react";
 import Link from "next/link";
 //import types and hooks
 import { Dispatch, SetStateAction, useState } from "react";
+//import components
 import CtaButtons from "./CtaButtons";
 
 type LinksType = {
@@ -14,12 +15,13 @@ type LinksType = {
 
 type HamburgerMenuProps={
     links:LinksType[],
-    active:number,
-    setActive:Dispatch<SetStateAction<number>>
+    active:string | null;
+    setActive: Dispatch<SetStateAction<string | null>>
 }
 
 export default function HamburgerMenu({ links,active,setActive }: HamburgerMenuProps) {
   const [open, setOpen] = useState(false);
+  console.log(active)
 
   return (
     <div className="flex lg:hidden ml-auto">
@@ -34,23 +36,23 @@ export default function HamburgerMenu({ links,active,setActive }: HamburgerMenuP
     <div 
       className="flex flex-col gap-2 absolute bg-(--bg-surface) border-(--border-navbar) border text-[16px] top-full right-4 mt-2 w-72 md:w-96 max-w-[calc(100vw-2rem)] rounded-2xl p-4 shadow-xl backdrop-blur-xl z-50"
     >
-      {links.map((link, index) => (
+      {links.map(link => (
         <Link
           key={link.href}
           href={link.href}
           onClick={() => {
-            setActive(index);
+            setActive(link.href);
             setOpen(false);
           }}
           className={`relative px-4 py-2.5 rounded-xl flex items-center ${
-            active === index
+            active===link.href
               ? "text-(--text-primary) font-semibold bg-(--accent-primary)/20"
               : "text-(--text-primary)"
           }`}
         >
           <span
             className={`absolute left-0 top-2 bottom-2 w-1 rounded-r-full bg-(--accent-primary)
-              ${active === index ? "opacity-100" : "opacity-0"}
+              ${active === link.href ? "opacity-100" : "opacity-0"}
             }`}
           />
           {link.name}
