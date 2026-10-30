@@ -5,6 +5,7 @@ import { Menu, X } from "lucide-react";
 import Link from "next/link";
 //import types and hooks
 import { Dispatch, SetStateAction, useState } from "react";
+import CtaButtons from "./CtaButtons";
 
 type LinksType = {
   href: string;
@@ -31,7 +32,7 @@ export default function HamburgerMenu({ links,active,setActive }: HamburgerMenuP
   </button>
   {open && (
     <div 
-      className="flex flex-col gap-2 absolute bg-(--bg-surface) border-(--border-navbar) border text-sm top-full right-4 mt-2 w-72 md:w-96 max-w-[calc(100vw-2rem)] rounded-2xl p-4 shadow-xl backdrop-blur-xl z-50"
+      className="flex flex-col gap-2 absolute bg-(--bg-surface) border-(--border-navbar) border text-[16px] top-full right-4 mt-2 w-72 md:w-96 max-w-[calc(100vw-2rem)] rounded-2xl p-4 shadow-xl backdrop-blur-xl z-50"
     >
       {links.map((link, index) => (
         <Link
@@ -55,6 +56,8 @@ export default function HamburgerMenu({ links,active,setActive }: HamburgerMenuP
           {link.name}
         </Link>
       ))}
+      <hr className="border-(--border-color) my-1" />
+      <CtaButtons/>
     </div>
   )}
 </div>
