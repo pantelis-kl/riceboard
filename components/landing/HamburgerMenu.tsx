@@ -4,7 +4,7 @@ import { Menu, X } from "lucide-react";
 //import link
 import Link from "next/link";
 //import types and hooks
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 //import components
 import CtaButtons from "./CtaButtons";
 
@@ -21,10 +21,28 @@ type HamburgerMenuProps={
 
 export default function HamburgerMenu({ links,active,setActive }: HamburgerMenuProps) {
   const [open, setOpen] = useState(false);
-  console.log(active)
+  const mouseRef=useRef<HTMLDivElement>(null);
+  
+  useEffect(()=>{
+    if(!open) return;
+
+    const onEscape=(e:KeyboardEvent)=>{
+      if(e.key==='Escape') setOpen(false)
+    }
+    const onOutsideClick=(e:MouseEvent)=>{
+      if (mouseRef.current && !mouseRef.current.contains(e.target as Node)) setOpen(false);
+    }
+    
+    addEventListener("keyup",onEscape);
+    addEventListener("mouseup",onOutsideClick);
+    return ()=>{
+      removeEventListener("keyup",onEscape)
+      removeEventListener("mouseup",onOutsideClick);
+    };
+  },[open])
 
   return (
-    <div className="flex lg:hidden ml-auto">
+    <div ref={mouseRef} className="flex lg:hidden ml-auto">
   <button 
     onClick={() => setOpen(!open)}
     aria-label="Toggle Navigation Menu"
