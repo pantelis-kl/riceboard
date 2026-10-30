@@ -6,6 +6,7 @@ import Logo from "../ui/Logo";
 import HamburgerMenu from "./HamburgerMenu";
 import NavigationLinks from "./NavigationLinks";
 import Theme from "../ui/Theme";
+import CtaButtons from "./CtaButtons";
 
 const links = [
   { href: "#live-demo", name: "Live demo" },
@@ -19,7 +20,7 @@ export default function NavigationBar() {
 
   return (
     <header
-      className="flex items-center justify-between w-full backdrop-blur-md p-2 lg:p-4 sticky top-0 z-50 border-b"
+      className="flex items-center justify-between w-full backdrop-blur-md p-3 lg:p-4 sticky top-0 z-50 border-b"
       style={{
         backgroundColor: "var(--bg-navbar)",
         borderColor: "var(--border-navbar)",
@@ -27,7 +28,8 @@ export default function NavigationBar() {
     >
       <Logo />
       <NavigationLinks links={links} active={active} setActive={setActive} />
-      <div className="lg:flex hidden flex-row">
+      <div className="lg:flex hidden flex-row gap-4 items-center">
+        <CtaButtons/>
         <Theme />
       </div>
       <div
