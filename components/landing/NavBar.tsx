@@ -1,12 +1,11 @@
 "use client";
-//import hooks and types
-import { useState } from "react";
 //import components
 import Logo from "../ui/Logo";
 import HamburgerMenu from "./HamburgerMenu";
 import NavigationLinks from "./NavigationLinks";
 import Theme from "../ui/Theme";
 import CtaButtons from "./CtaButtons";
+import { useActiveHref } from "@/hooks/useActiveHref";
 
 const links = [
   { href: "#live-demo", name: "Live demo" },
@@ -15,8 +14,11 @@ const links = [
   { href: "#how-it-works", name: "How it works" },
 ];
 
+const hrefs=links.map(l=>l.href);
+
 export default function NavigationBar() {
-  const [active, setActive] = useState(0);
+  
+  const [active, setActive] = useActiveHref(hrefs)
 
   return (
     <header
