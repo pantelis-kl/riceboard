@@ -22,7 +22,7 @@ export default function NavigationLinks({
   setActive,
 }: NavigationLinksProps) {
   return (
-    <div className="hidden lg:flex flex-row gap-8 text-[16px] font-medium">
+    <div className="hidden lg:flex p-2 flex-row gap-8 text-sm xl:text-[16px] font-medium">
       {links.map((link, index) => (
         <Link
           key={link.href}
