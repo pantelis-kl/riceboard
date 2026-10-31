@@ -34,17 +34,26 @@ export default function SortCards({ features }: { features: FeaturesProps[] }) {
   }
 
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex flex-col gap-2 lg:py-12 w-full">
+        <h3 className="text-sm text-center font-bold tracking-wide text-(--text-primary) uppercase">
+        Live RICE Matrix
+    </h3>
+    <div className="flex items-center justify-between px-4 pb-2 mt-3 border-b border-(--border-color)/50 text-xs font-semibold text-(--text-secondary) uppercase tracking-wider">
+        <p>Features</p>
+        <span className="flex items-center w-40 sm:w-48 justify-end pr-8 sm:pr-10">
+            <p>RICE</p>
+        </span>
+    </div>
       <ul className="flex flex-col gap-2 w-full">
         {sortedFeatures.map((s, index) => (
           <motion.li
             key={s.id}
             layout
-            transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            className="flex items-center justify-between p-4 rounded-xl border border-(--border-color) bg-(--bg-surface) text-(--text-primary) shadow-sm hover:border-purple-500/50 transition-all"
+            transition={{ type: "spring", stiffness: 350, damping: 30 }}
+            className="flex items-center justify-between p-4 rounded-xl border border-(--border-color) bg-(--bg-surface) text-(--text-primary) shadow-sm hover:border-purple-500/50 transition-colors"
           >
             <div className="flex items-center gap-3">
-              <span className="text-xs font-bold px-2 py-1 rounded-md bg-(--border-color)/30 text-(--text-secondary)">
+              <span className="text-xs font-bold px-2 whitespace-nowrap py-1 rounded-md bg-(--border-color)/30 text-(--text-secondary)">
                 # {index + 1}
               </span>
               <span className="text-sm font-medium text-(--text-primary)">
