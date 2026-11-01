@@ -1,17 +1,17 @@
 //import link
 import Link from "next/link";
 import SortCards from "./SortCards";
+import Chips from "../ui/Chips";
 
-const features=[
-    {id:1,name:'Dark theme',score:60},
-    {id:2,name:'Export to CSV',score:53},
-    {id:3,name:'Push notifications',score:48},
-    {id:4,name:'Auto-save',score:37},
-    {id:5,name:'Drag & Drop',score:33}
-]
+const features = [
+  { id: 1, name: "Dark theme", score: 60 },
+  { id: 2, name: "Export to CSV", score: 53 },
+  { id: 3, name: "Push notifications", score: 48 },
+  { id: 4, name: "Auto-save", score: 37 },
+  { id: 5, name: "Drag & Drop", score: 33 },
+];
 
 export default function Hero() {
-    
   return (
     <section className="relative flex flex-col justify-start items-center w-full min-h-[calc(100vh-4rem)] px-4 lg:px-8 py-16 overflow-hidden bg-(--bg-primary)">
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -30,48 +30,23 @@ export default function Hero() {
             Upload your feature list, score it together live with RICE, and let
             AI surface where your team disagrees.
           </p>
-          <div className="flex flex-wrap items-center gap-2 pt-1">
-            <div
-              className="flex items-center gap-1.5 px-3 py-1 rounded-lg border border-(--border-color) bg-(--bg-surface) text-sm font-medium text-(--text-primary) shadow-sm hover:border-purple-500/50 transition-colors cursor-default"
-              title="Reach: How many users will this impact per period?"
-            >
-              <span className="font-bold text-purple-500">R</span>each
-            </div>
-            <div
-              className="flex items-center gap-1.5 px-3 py-1 rounded-lg border border-(--border-color) bg-(--bg-surface) text-sm font-medium text-(--text-primary) shadow-sm hover:border-purple-500/50 transition-colors cursor-default"
-              title="Impact: How much will this increase user success?"
-            >
-              <span className="font-bold text-purple-500">I</span>mpact
-            </div>
-            <div
-              className="flex items-center gap-1.5 px-3 py-1 rounded-lg border border-(--border-color) bg-(--bg-surface) text-sm font-medium text-(--text-primary) shadow-sm hover:border-purple-500/50 transition-colors cursor-default"
-              title="Confidence: How sure are you about your estimates?"
-            >
-              <span className="font-bold text-purple-500">C</span>onfidence
-            </div>
-            <div
-              className="flex items-center gap-1.5 px-3 py-1 rounded-lg border border-(--border-color) bg-(--bg-surface) text-sm font-medium text-(--text-primary) shadow-sm hover:border-purple-500/50 transition-colors cursor-default"
-              title="Effort: How manymonths will it take?"
-            >
-              <span className="font-bold text-purple-500">E</span>ffort
-            </div>
-          </div>
+          <Chips/>
           <div className="flex items-center gap-3 mt-5">
             <Link
-            href="/sign-up"
-            className="px-6 py-3.5 rounded-xl bg-(--accent-primary) text-white font-medium text-center hover:opacity-90 transition-all shadow-md hover:shadow-lg active:scale-[0.98]"
+              href="/sign-up"
+              className="px-6 py-3.5 rounded-xl bg-(--accent-primary) text-white font-medium text-center hover:opacity-90 transition-all shadow-md hover:shadow-lg active:scale-[0.98]"
             >
-            Get Started
+              Get Started
             </Link>
             <Link
-            href="/demo"
-            className="px-6 py-3.5 rounded-xl border border-(--border-color) bg-(--bg-surface) text-(--text-primary) font-medium text-center hover:bg-(--border-color)/20 transition-all shadow-sm active:scale-[0.98]"
+              href="/demo"
+              className="px-6 py-3.5 rounded-xl border border-(--border-color) bg-(--bg-surface) text-(--text-primary) font-medium text-center hover:bg-(--border-color)/20 transition-all shadow-sm active:scale-[0.98]"
             >
-            Try it out
+              Try it out
             </Link>
+          </div>
         </div>
-        </div>
-        <SortCards features={features}/>
+        <SortCards features={features} />
       </div>
     </section>
   );
