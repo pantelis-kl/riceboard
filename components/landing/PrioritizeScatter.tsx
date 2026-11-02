@@ -1,59 +1,87 @@
-"use client";
+import { Scatter, ScatterChart, Tooltip, XAxis, YAxis } from "recharts";
 
-import { useState } from "react";
+type DataType = {
+  feature: string;
+  impact: number;
+  effort: number;
+};
 
-const data=[
-    {feature:'Dark theme',impact:1,effort:1}
-]
-
-export default function PrioritizeScatter(){
-
-    const [updateData,setUpdateData]=useState(data);
-    const [firstFeature,setFirstFeature]=useState(data[0].feature);
-    const selectedFeature=updateData.find(u=>u.feature===firstFeature)!;
-
-    const updateScore=(key:'impact' | 'effort',value:number)=>{
-        setUpdateData(prev=>prev.map(u=> ({...u, [key]:value})))
-    }
-
-    return(
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-      <div className="flex flex-col gap-2">
-          <div
-          className="flex flex-col gap-3"
-          >
-            <label htmlFor="impact" className="text-(--text-primary)">
-            Impact : <span className="text-(--accent-primary)">{selectedFeature.impact}</span>
-          </label>
-        <input 
-          type="range" 
-          id="impact"
-          min={1} 
-          max={10} 
-          step={1}
-          value={selectedFeature.impact}
-          onChange={e=>updateScore('impact',Number(e.target.value))}
-          className="w-40 lg:w-50 accent-purple-500 cursor-pointer bg-(--border-color) rounded-lg h-2"
+export default function PrioritizeScatter({ data }: { data: DataType[] }) {
+  return (
+    <div className="flex flex-col items-center justify-center w-full p-4 rounded-2xl border border-(--border-color) bg-(--bg-surface) shadow-sm">
+      <ScatterChart
+        responsive
+        style={{
+          width: "100%",
+          maxWidth: "700px",
+          height: "35vh",
+          aspectRatio: 1.618,
+        }}
+        margin={{ top: 20, right: 24, bottom: 28, left: 12 }}
+      >
+        <XAxis
+          type="number"
+          dataKey="effort"
+          name="effort"
+          domain={[0, 10]}
+          ticks={[0, 5, 10]}
+          tick={{ fontSize: 12, fill: "var(--text-secondary)", opacity: 0.6 }}
+          stroke="var(--border-color)"
+          label={{
+            value: "Effort",
+            position: "insideBottom",
+            offset: -15,
+            fill: "var(--text-secondary)",
+            style: { fontSize: "12px" },
+          }}
         />
-          </div>
-          <div
-          className="flex flex-col gap-3"
-          >
-            <label htmlFor="effort" className="text-(--text-primary)">
-            Effort : <span className="text-(--accent-primary)">{selectedFeature.effort}</span>
-          </label>
-        <input 
-          type="range" 
-          id="effort"
-          min={1} 
-          max={10} 
-          step={1}
-          value={selectedFeature.effort}
-          onChange={e=>updateScore('effort',Number(e.target.value))}
-          className="w-40 lg:w-50 accent-purple-500 cursor-pointer bg-(--border-color) rounded-lg h-2"
+        <YAxis
+          type="number"
+          dataKey="impact"
+          name="impact"
+          domain={[0, 10]}
+          ticks={[0, 5, 10]}
+          tick={{ fontSize: 12, fill: "var(--text-secondary)", opacity: 0.6 }}
+          stroke="var(--border-color)"
+          fill="var(--text-secondary)"
+          label={{
+            value: "Impact",
+            angle: -90,
+            position: "insideLeft",
+            fill: "var(--text-secondary)",
+            style: { fontSize: "12px", textAnchor: "middle" },
+          }}
         />
-          </div>
-      </div>
-      </div>
-    )
+        <Tooltip
+          content={({ active, payload }) => {
+            if (!active || !payload?.length) return null;
+            const p = payload[0].payload as DataType;
+
+            return (
+              <div className="flex flex-col gap-1.5 px-3.5 py-2.5 rounded-xl border border-(--border-color) bg-(--bg-surface) shadow-xl text-xs max-w-xs pointer-events-none">
+                <h4 className="font-semibold text-(--accent-primary) text-sm tracking-tight border-b border-(--border-color)/50 pb-1">
+                  {p.feature}
+                </h4>
+                <div className="flex flex-col gap-0.5 text-(--text-primary)">
+                  <div className="flex justify-between gap-4">
+                    <span>Impact:</span>
+                    <span className="font-medium text-(--text-secondary)">
+                      {p.impact}
+                    </span>
+                  </div>
+                  <div className="flex justify-between gap-4">
+                    <span>Effort:</span>
+                    <span className="font-medium text-(--text-secondary)">
+                      {p.effort}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            );
+          }}
+        />
+        <Scatter data={data} />
+      </ScatterChart>
+    </div>
+  );
 }
