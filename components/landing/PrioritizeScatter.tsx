@@ -65,13 +65,26 @@ export default function PrioritizeScatter({
   setFirstId,
 }: PrioritizeScatterProps) {
   const [hoveredGroup, setHoveredGroup] = useState<string | null>(null);
+  const [clickedPoint, setClickedPoint] = useState<DataType | null>(null);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
   const leaveTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
+
+  useEffect(() => {
+    const hoverQuery = window.matchMedia("(hover: none)");
+    const updateInputMode = () => setIsTouchDevice(hoverQuery.matches);
+
+    updateInputMode();
+    hoverQuery.addEventListener("change", updateInputMode);
+    return () => hoverQuery.removeEventListener("change", updateInputMode);
+  }, []);
+
   useEffect(() => {
     if (!hoveredGroup) return;
 
     const close = (e: PointerEvent) => {
       if ((e.target as Element).closest("[data-dot]")) return;
       setHoveredGroup(null);
+      setClickedPoint(null);
     };
 
     document.addEventListener("pointerdown", close);
@@ -222,9 +235,10 @@ export default function PrioritizeScatter({
           strokeDasharray="4 4"
         />
         <Tooltip
+          trigger={isTouchDevice ? "click" : "hover"}
           content={({ active, payload }) => {
             if (!active || !payload?.length) return null;
-            const p = payload[0].payload as DataType;
+            const p = clickedPoint ?? (payload[0].payload as DataType);
 
             return (
               hoveredGroup && (
@@ -259,6 +273,7 @@ export default function PrioritizeScatter({
               {...(props as Pick<ShapeProps, "cx" | "cy" | "payload">)}
               firstId={firstId}
               setFirstId={setFirstId}
+              setClickedPoint={setClickedPoint}
               quadrant={quadrant}
               hoveredGroup={hoveredGroup}
               enterGroup={enterGroup}

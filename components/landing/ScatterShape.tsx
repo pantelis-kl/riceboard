@@ -32,6 +32,7 @@ type ScatterShapeProps = {
   payload?: DataType;
   firstId: number;
   setFirstId: Dispatch<SetStateAction<number>>;
+  setClickedPoint: Dispatch<SetStateAction<DataType | null>>;
   quadrant: QuadrantType;
   hoveredGroup: string | null;
   enterGroup: (key: string) => void;
@@ -44,13 +45,14 @@ export default function ScatterShape({
   payload,
   firstId,
   setFirstId,
+  setClickedPoint,
   quadrant,
   hoveredGroup,
   enterGroup,
   leaveGroup,
 }: ScatterShapeProps) {
-  if (!cx || !cy || !payload) return null;
   const reduceMotion = useReducedMotion() ?? false;
+  if (!cx || !cy || !payload) return null;
   const color = getQuadrant(payload, quadrant).color;
   const selectedId = payload.id === firstId;
   const spring = reduceMotion
@@ -65,13 +67,17 @@ export default function ScatterShape({
   return (
     <g
       data-dot
-  onMouseEnter={() => payload.groupKey && enterGroup(payload.groupKey)}
-  onMouseLeave={leaveGroup}
-  onClick={() => {
-    setFirstId(payload.id);
-    payload.groupKey && enterGroup(payload.groupKey);
-  }}
-  style={{ cursor: "pointer" }}
+      onMouseEnter={() => {
+        setClickedPoint(null);
+        if (payload.groupKey) enterGroup(payload.groupKey);
+      }}
+      onMouseLeave={leaveGroup}
+      onClick={() => {
+        setFirstId(payload.id);
+        setClickedPoint(payload);
+        if (payload.groupKey) enterGroup(payload.groupKey);
+      }}
+      style={{ cursor: "pointer" }}
     >
       {selectedId && (
         <motion.circle
