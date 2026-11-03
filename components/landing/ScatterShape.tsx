@@ -95,7 +95,7 @@ export default function ScatterShape({
         r={7}
         fill={color}
         initial={false}
-        animate={{ cx, cy, fill: color }}
+        animate={{ cx: x, cy, fill: color }}
         transition={spring}
       />
     </g>
