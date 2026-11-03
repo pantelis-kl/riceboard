@@ -10,6 +10,10 @@
    --text-primary: #0f172a;
    --text-secondary:#64748b;
    --accent-primary:#6d28d9;
+   --quad-quick: rgb(33, 196, 93);
+  --quad-major: rgb(139, 92, 246);
+  --quad-fill: rgb(148, 163, 184);
+  --quad-rec: rgb(239, 68, 68);
 }
 
 .dark{
@@ -21,5 +25,13 @@
   --text-primary: #f9fafb;
   --text-secondary: #94a3b8;
   --accent-primary:#a78bfa;
+   --q-quick: rgb(74, 222, 128);
+  --q-bets: rgb(167, 139, 250);
+  --q-fill: rgb(148, 163, 184);
+  --q-sink: rgb(248, 113, 113);
 }
+}
+
+html{
+  scroll-behavior: smooth;
 }

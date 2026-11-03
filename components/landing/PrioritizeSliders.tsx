@@ -1,6 +1,7 @@
 "use client";
-
+//import hooks
 import { useState } from "react";
+//import components
 import PrioritizeScatter from "./PrioritizeScatter";
 
 type DataType = {
@@ -17,6 +18,13 @@ const data: DataType[] = [
   {id:4,  feature: "Drag & Drop", impact: 4, effort: 4 },
 ];
 
+const quadrant={
+   quickWins:{name:"Quick wins",color:"var(--quad-quick)"},
+   majorProjects:{name:"Major projects",color:"var(--quad-major)"},
+   fillIns:{name:"Fill in's",color:"var(--quad-fill)"},
+   reconsider:{name:"Reconsider",color:"var(--quad-rec)"}
+}
+
 export default function PrioritizeSliders() {
   const [updateData, setUpdateData] = useState(data);
   const [firstId, setFirstId] = useState(data[0].id);
@@ -27,9 +35,9 @@ export default function PrioritizeSliders() {
   };
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <div className="inline lg:hidden">
-        <PrioritizeScatter data={updateData} />
+        <PrioritizeScatter data={updateData} quadrant={quadrant} firstId={firstId} setFirstId={setFirstId}/>
       </div>
       <div className="flex flex-row gap-5 lg:gap-16 items-center justify-center">
         <div className="flex flex-col gap-2">
@@ -70,13 +78,13 @@ export default function PrioritizeSliders() {
             />
           </div>
         </div>
-        <div className="flex flex-row flex-wrap lg:grid grid-cols-2 gap-2 lg:gap-3">
+        <div className="flex flex-row flex-wrap md:grid grid-cols-2 gap-2 lg:gap-3">
           {updateData.map((u) => (
             <div key={u.id}>
               <button
                 type="button"
                 onClick={()=>setFirstId(u.id)}
-                className="lg:px-4 w-full h-full min-h-10 lg:py-2 px-3 py-1.5 rounded-lg border border-(--border-color) bg-(--bg-surface) text-xs font-medium text-(--text-primary) shadow-sm hover:border-purple-500/50 hover:bg-purple-500/5 transition-all duration-150 cursor-pointer"
+                className="lg:px-4 w-full h-full min-h-10 lg:py-2 px-3 py-1.5 rounded-lg border border-(--border-color) bg-(--bg-surface) text-xs md:text-sm font-medium text-(--text-primary) shadow-sm hover:border-purple-500/50 hover:bg-purple-500/5 transition-all duration-150 cursor-pointer"
               >
                 <span>{u.feature}</span>
               </button>
@@ -85,7 +93,7 @@ export default function PrioritizeSliders() {
         </div>
       </div>
       <div className="hidden lg:inline">
-        <PrioritizeScatter data={updateData} />
+        <PrioritizeScatter data={updateData} quadrant={quadrant} firstId={firstId} setFirstId={setFirstId}/>
       </div>
     </div>
   );
