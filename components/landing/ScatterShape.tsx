@@ -3,28 +3,10 @@ import { getQuadrant } from "@/utils/quadrants";
 import { motion, useReducedMotion } from "motion/react";
 //import types
 import { Dispatch, SetStateAction } from "react";
-
-type DataType = {
-  id: number;
-  feature: string;
-  impact: number;
-  effort: number;
-  groupIndex?: number;
-  groupSize?: number;
-  groupKey?: string | null;
-};
-
-type QuadrantType = {
-  quickWins: QuadrantProps;
-  majorProjects: QuadrantProps;
-  fillIns: QuadrantProps;
-  reconsider: QuadrantProps;
-};
-
-type QuadrantProps = {
-  name: string;
-  color: string;
-};
+//import data type
+import { DataType } from "@/schema/features.schema";
+//import quadrant type
+import { quadrant } from "@/schema/quadrant.schema";
 
 type ScatterShapeProps = {
   cx?: number;
@@ -33,7 +15,6 @@ type ScatterShapeProps = {
   firstId: number;
   setFirstId: Dispatch<SetStateAction<number>>;
   setClickedPoint: Dispatch<SetStateAction<DataType | null>>;
-  quadrant: QuadrantType;
   hoveredGroup: string | null;
   enterGroup: (key: string) => void;
   leaveGroup: () => void;
@@ -46,7 +27,6 @@ export default function ScatterShape({
   firstId,
   setFirstId,
   setClickedPoint,
-  quadrant,
   hoveredGroup,
   enterGroup,
   leaveGroup,

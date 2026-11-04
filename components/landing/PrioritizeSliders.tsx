@@ -3,27 +3,10 @@
 import { useState } from "react";
 //import components
 import PrioritizeScatter from "./PrioritizeScatter";
-
-type DataType = {
-  id:number
-  feature: string;
-  impact: number;
-  effort: number;
-};
-
-const data: DataType[] = [
-  {id:1, feature: "Dark theme", impact: 8, effort: 2 },
-  {id:2,  feature: "Export to CSV", impact: 4, effort: 8 },
-  {id:3,  feature: "Push notifications", impact: 9, effort: 9 },
-  {id:4,  feature: "Drag & Drop", impact: 4, effort: 4 },
-];
-
-const quadrant={
-   quickWins:{name:"Quick wins",color:"var(--quad-quick)"},
-   majorProjects:{name:"Major projects",color:"var(--quad-major)"},
-   fillIns:{name:"Fill in's",color:"var(--quad-fill)"},
-   reconsider:{name:"Reconsider",color:"var(--quad-rec)"}
-}
+//import features data
+import {data} from '@/schema/features.schema';
+//import quadrant data
+import { quadrant } from "@/schema/quadrant.schema";
 
 export default function PrioritizeSliders() {
   const [updateData, setUpdateData] = useState(data);
@@ -37,7 +20,7 @@ export default function PrioritizeSliders() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <div className="inline lg:hidden">
-        <PrioritizeScatter data={updateData} quadrant={quadrant} firstId={firstId} setFirstId={setFirstId}/>
+        <PrioritizeScatter data={updateData} firstId={firstId} setFirstId={setFirstId}/>
       </div>
       <div className="flex flex-row gap-5 lg:gap-16 items-center justify-center">
         <div className="flex flex-col gap-2">
@@ -94,7 +77,7 @@ export default function PrioritizeSliders() {
         </div>
       </div>
       <div className="hidden lg:inline">
-        <PrioritizeScatter data={updateData} quadrant={quadrant} firstId={firstId} setFirstId={setFirstId}/>
+        <PrioritizeScatter data={updateData} firstId={firstId} setFirstId={setFirstId}/>
       </div>
     </div>
   );

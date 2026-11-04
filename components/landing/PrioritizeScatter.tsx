@@ -21,25 +21,11 @@ import {
 } from "recharts";
 //import components
 import ScatterShape from "./ScatterShape";
-
-type DataType = {
-  id: number;
-  feature: string;
-  impact: number;
-  effort: number;
-};
-
-type QuadrantType = {
-  quickWins: QuadrantProps;
-  majorProjects: QuadrantProps;
-  fillIns: QuadrantProps;
-  reconsider: QuadrantProps;
-};
-
-type QuadrantProps = {
-  name: string;
-  color: string;
-};
+import { getQuadrant } from "@/utils/quadrants";
+//import features data type
+import { DataType } from "@/schema/features.schema";
+//import quadrant data
+import { quadrant } from "@/schema/quadrant.schema";
 
 type ShapeProps = {
   cx?: number;
@@ -51,7 +37,6 @@ type ShapeProps = {
 
 type PrioritizeScatterProps = {
   data: DataType[];
-  quadrant: QuadrantType;
   firstId: number;
   setFirstId: Dispatch<SetStateAction<number>>;
 };
@@ -60,7 +45,6 @@ const mid = 5;
 
 export default function PrioritizeScatter({
   data,
-  quadrant,
   firstId,
   setFirstId,
 }: PrioritizeScatterProps) {
@@ -260,6 +244,7 @@ export default function PrioritizeScatter({
                       </span>
                     </div>
                   </div>
+                  <p style={{color:getQuadrant(p,quadrant).color}} className="text-xs">{getQuadrant(p,quadrant).name}</p>
                 </div>
               )
             );
@@ -274,7 +259,6 @@ export default function PrioritizeScatter({
               firstId={firstId}
               setFirstId={setFirstId}
               setClickedPoint={setClickedPoint}
-              quadrant={quadrant}
               hoveredGroup={hoveredGroup}
               enterGroup={enterGroup}
               leaveGroup={leaveGroup}
