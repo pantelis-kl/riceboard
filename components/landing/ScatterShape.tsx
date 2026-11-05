@@ -4,9 +4,9 @@ import { motion, useReducedMotion } from "motion/react";
 //import types
 import { Dispatch, SetStateAction } from "react";
 //import data type
-import { DataType } from "@/schema/features.schema";
+import { DataType } from "@/data/prioritize";
 //import quadrant type
-import { quadrant } from "@/schema/quadrant.schema";
+import { quadrant } from "@/data/quadrant.schema";
 
 type ScatterShapeProps = {
   cx?: number;

@@ -4,9 +4,9 @@ import { useState } from "react";
 //import components
 import PrioritizeScatter from "./PrioritizeScatter";
 //import features data
-import {data} from '@/schema/features.schema';
+import {data} from '@/data/prioritize';
 //import quadrant data
-import { quadrant } from "@/schema/quadrant.schema";
+import { quadrant } from "@/data/quadrant.schema";
 
 export default function PrioritizeSliders() {
   const [updateData, setUpdateData] = useState(data);

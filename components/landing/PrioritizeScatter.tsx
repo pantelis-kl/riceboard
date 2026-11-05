@@ -23,9 +23,9 @@ import {
 import ScatterShape from "./ScatterShape";
 import { getQuadrant } from "@/utils/quadrants";
 //import features data type
-import { DataType } from "@/schema/features.schema";
+import { DataType } from "@/data/prioritize";
 //import quadrant data
-import { quadrant } from "@/schema/quadrant.schema";
+import { quadrant } from "@/data/quadrant.schema";
 
 type ShapeProps = {
   cx?: number;
