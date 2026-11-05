@@ -1,35 +1,46 @@
 "use client";
 //import features data
-import { features } from "@/data/features";
-import { useRef, useState, type WheelEvent } from "react";
+import { features, FeaturesType } from "@/data/features";
+import { useEffect, useRef, useState } from "react";
 
 export default function FeaturesSection() {
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState<FeaturesType["component"]>(features[0].component);
+  const activeRef = useRef(0);
   const lastWheelAt = useRef(0);
+  const featureListRef = useRef<HTMLDivElement>(null);
 
-const handleWheel = (event: WheelEvent<HTMLDivElement>) => {
-  if (window.innerWidth < 1024) return;
-  
-  const direction = Math.sign(event.deltaY);
-  if (!direction) return;
+  useEffect(() => {
+    const featureList = featureListRef.current;
+    if (!featureList) return;
 
-  if (
-    (direction > 0 && active === features.length - 1) ||
-    (direction < 0 && active === 0)
-  ) {
-    return;
-  }
+    const handleWheel = (event: WheelEvent) => {
+      if (window.innerWidth < 1024) return;
 
-  event.preventDefault();
+      const direction = Math.sign(event.deltaY);
+      if (!direction) return;
 
-  const now = Date.now();
-  if (now - lastWheelAt.current < 450) return;
+      const current = activeRef.current;
+      if (
+        (direction < 0 && current === 0) ||
+        (direction > 0 && current === features.length - 1)
+      ) {
+        return;
+      }
 
-  lastWheelAt.current = now;
-  setActive((current) =>
-    Math.max(0, Math.min(features.length - 1, current + direction))
-  );
-};
+      event.preventDefault();
+
+      const now = Date.now();
+      if (now - lastWheelAt.current < 450) return;
+
+      lastWheelAt.current = now;
+      const next = current + direction;
+      activeRef.current = next;
+      setActive(features[next].component);
+    };
+
+    featureList.addEventListener("wheel", handleWheel, { passive: false });
+    return () => featureList.removeEventListener("wheel", handleWheel);
+  }, []);
 
   return (
     <section
@@ -45,15 +56,21 @@ const handleWheel = (event: WheelEvent<HTMLDivElement>) => {
           versus effort, and let AI surface alignment gaps before you build.
         </p>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6" onWheel={handleWheel}>
-        <div className="flex flex-row lg:flex-col gap-2 lg:gap-0 overflow-x-auto scrollbar-none  lg:overflow-visible mask-[linear-gradient(to_right,#000_85%,transparent)] lg:mask-none border-b border-(--border-color) lg:border-b-0 ">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div
+            ref={featureListRef}
+          className="flex flex-row lg:flex-col gap-1 lg:gap-0 overflow-x-auto scrollbar-none  lg:overflow-visible mask-[linear-gradient(to_right,#000_85%,transparent)] lg:mask-none border-b border-(--border-color) lg:border-b-0 "
+        >
           {features.map((f, index) => (
             <button
               key={f.id}
               type="button"
-              onClick={() => setActive(index)}
+              onClick={() => {
+                activeRef.current = index;
+                setActive(f.component);
+              }}
               className={`group flex gap-3 p-3 text-left cursor-pointer shrink-0 lg:shrink lg:w-full border-b-2 lg:border-b-0 lg:border-l-2 transition-colors duration-300 ${
-                active === index
+                active === f.component
                   ? "border-(--accent-primary)"
                   : "border-transparent lg:border-(--border-color)"
               }`}
@@ -65,7 +82,7 @@ const handleWheel = (event: WheelEvent<HTMLDivElement>) => {
 
                 <span
                   className={`hidden lg:grid transition-[grid-template-rows,opacity] duration-300 group-hover:grid-rows-[1fr] group-hover:opacity-100 ${
-                    active === index
+                    active === f.component
                       ? "grid-rows-[1fr] opacity-100"
                       : "grid-rows-[0fr] opacity-0"
                   }`}
