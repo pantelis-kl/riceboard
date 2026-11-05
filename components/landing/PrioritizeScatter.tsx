@@ -25,7 +25,7 @@ import { getQuadrant } from "@/utils/quadrants";
 //import features data type
 import { DataType } from "@/data/prioritize";
 //import quadrant data
-import { quadrant } from "@/data/quadrant.schema";
+import { quadrant } from "@/data/quadrants";
 
 type ShapeProps = {
   cx?: number;

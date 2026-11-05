@@ -6,7 +6,7 @@ import PrioritizeScatter from "./PrioritizeScatter";
 //import features data
 import {data} from '@/data/prioritize';
 //import quadrant data
-import { quadrant } from "@/data/quadrant.schema";
+import { quadrant } from "@/data/quadrants";
 
 export default function PrioritizeSliders() {
   const [updateData, setUpdateData] = useState(data);

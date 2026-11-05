@@ -1,3 +1,4 @@
+"use client";
 //import useReduceMotion for dot animation
 import { getQuadrant } from "@/utils/quadrants";
 import { motion, useReducedMotion } from "motion/react";
@@ -6,7 +7,7 @@ import { Dispatch, SetStateAction } from "react";
 //import data type
 import { DataType } from "@/data/prioritize";
 //import quadrant type
-import { quadrant } from "@/data/quadrant.schema";
+import { quadrant } from "@/data/quadrants";
 
 type ScatterShapeProps = {
   cx?: number;
