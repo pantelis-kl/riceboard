@@ -1,11 +1,17 @@
 "use client";
 //import features data
 import { features, FeaturesType } from "@/data/features";
+//import hooks
 import { useEffect, useRef, useState } from "react";
+//import components
 import UploadDemo from "./UploadDemo";
+import SortCards from "./SortCards";
+//import from motion
+import { AnimatePresence, motion } from "motion/react";
 
 const components:Record<string, React.ReactNode>={
-    upload:<UploadDemo/>
+    upload:<UploadDemo/>,
+    ranking:<SortCards/>,
 }
 
 export default function FeaturesSection() {
@@ -63,7 +69,7 @@ export default function FeaturesSection() {
           versus effort, and let AI surface alignment gaps before you build.
         </p>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:h-120 lg:w-6xl">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:h-120 xl:w-6xl">
         <div
           ref={featureListRef}
           className="flex flex-row lg:min-h-0 w-full lg:flex-col self-center gap-1 lg:gap-0 overflow-x-auto scrollbar-none lg:overflow-y-auto mask-[linear-gradient(to_right,#000_85%,transparent)] lg:mask-none border-b border-(--border-color) lg:border-b-0"
@@ -104,14 +110,25 @@ export default function FeaturesSection() {
             </button>
           ))}
         </div>
-        <div className="flex flex-col items-center justify-start w-full p-6 min-h-48 lg:min-h-0 lg:h-full lg:overflow-y-auto">
+        <div className="flex flex-col items-center justify-start w-full p-6 min-h-48 lg:min-h-0 lg:h-full">
           <h2 className="text-lg font-semibold text-(--text-primary) tracking-tight mb-2">
             {features[activeRef.current].feature}
           </h2>
           <p className="text-sm text-(--text-secondary) leading-relaxed">
             {features[activeRef.current].text}
           </p>
-          {active && components[active]}
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+                key={features[activeRef.current].id}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.2 }}
+                className="mt-3"
+              >
+                {active && components[active]}
+              </motion.div>
+          </AnimatePresence>
         </div>
       </div>
     </section>
