@@ -1,6 +1,8 @@
 "use client";
 //import hooks
 import { useState } from "react";
+//import icons
+import { ArrowRight } from "lucide-react";
 
 const demoData=[
     {id:1, feature: "Dark theme",reach:2300, impact:1.5 , confidence:60,effort: 6 },
@@ -14,6 +16,7 @@ export default function VoteDemo() {
   const [activeFeature, setActiveFeature] = useState(0);
   const [updatedData,setUpdateData]=useState(demoData);
   const selectedFeature=updatedData[activeFeature]
+  const rice=Number(Math.round((selectedFeature.reach*selectedFeature.impact*(selectedFeature.confidence)/100)/selectedFeature.effort))
 
   const updateRice=(key:'reach' | 'impact' | 'confidence' | 'effort',value:number)=>{
      setUpdateData((prev) => prev.map((u,index) => (activeFeature === index ? { ...u, [key]: value } : u)));
@@ -56,9 +59,7 @@ export default function VoteDemo() {
             onChange={(e) => updateRice("reach", Number(e.target.value))}
             className="w-full h-1.5 bg-(--border-color) rounded-lg appearance-none cursor-pointer accent-purple-500"
           />
-          <div
-          className="flex justify-between text-xs text-(--text-secondary)"
-          >
+          <div className="flex justify-between text-xs text-(--text-secondary)">
             <p>Few users</p>
             <p>lots of users</p>
           </div>
@@ -85,14 +86,12 @@ export default function VoteDemo() {
             onChange={(e) => updateRice("impact", Number(e.target.value))}
             className="w-full h-1.5 bg-(--border-color) rounded-lg appearance-none cursor-pointer accent-purple-500"
           />
-          <div
-          className="flex justify-between text-xs text-(--text-secondary)"
-          >
+          <div className="flex justify-between text-xs text-(--text-secondary)">
             <p>Minimal</p>
             <p>Massive</p>
           </div>
-      </div>
-      <div className="flex flex-col gap-2">
+        </div>
+        <div className="flex flex-col gap-2">
           <div className="flex items-center justify-between">
             <label
               htmlFor="confidence"
@@ -114,14 +113,12 @@ export default function VoteDemo() {
             onChange={(e) => updateRice("confidence", Number(e.target.value))}
             className="w-full h-1.5 bg-(--border-color) rounded-lg appearance-none cursor-pointer accent-purple-500"
           />
-          <div
-          className="flex justify-between text-xs text-(--text-secondary)"
-          >
+          <div className="flex justify-between text-xs text-(--text-secondary)">
             <p>low</p>
             <p>high</p>
           </div>
-      </div>
-       <div className="flex flex-col gap-2">
+        </div>
+        <div className="flex flex-col gap-2">
           <div className="flex items-center justify-between">
             <label
               htmlFor="effort"
@@ -143,14 +140,21 @@ export default function VoteDemo() {
             onChange={(e) => updateRice("effort", Number(e.target.value))}
             className="w-full h-1.5 bg-(--border-color) rounded-lg appearance-none cursor-pointer accent-purple-500"
           />
-          <div
-          className="flex justify-between text-xs text-(--text-secondary)"
-          >
+          <div className="flex justify-between text-xs text-(--text-secondary)">
             <p>Few days</p>
             <p>Many months</p>
           </div>
+        </div>
       </div>
+      <div className="flex items-center justify-between rounded-lg border border-(--border-color) bg-(--bg-primary) px-4 py-3">
+        <span className="text-sm text-(--text-secondary)">RICE score</span>
+        <span className="text-2xl font-semibold tabular-nums text-(--text-primary)">
+          {rice.toLocaleString()}
+        </span>
       </div>
+      <button>
+        Next Feature
+      </button>
     </div>
   );
 }
