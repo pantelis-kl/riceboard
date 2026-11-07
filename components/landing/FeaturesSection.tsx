@@ -2,9 +2,16 @@
 //import features data
 import { features, FeaturesType } from "@/data/features";
 import { useEffect, useRef, useState } from "react";
+import UploadDemo from "./UploadDemo";
+
+const components:Record<string, React.ReactNode>={
+    upload:<UploadDemo/>
+}
 
 export default function FeaturesSection() {
-  const [active, setActive] = useState<FeaturesType["component"]>(features[0].component);
+  const [active, setActive] = useState<FeaturesType["component"]>(
+    features[0].component,
+  );
   const activeRef = useRef(0);
   const lastWheelAt = useRef(0);
   const featureListRef = useRef<HTMLDivElement>(null);
@@ -56,10 +63,10 @@ export default function FeaturesSection() {
           versus effort, and let AI surface alignment gaps before you build.
         </p>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:h-120 lg:w-6xl">
         <div
-            ref={featureListRef}
-          className="flex flex-row lg:flex-col gap-1 lg:gap-0 overflow-x-auto scrollbar-none  lg:overflow-visible mask-[linear-gradient(to_right,#000_85%,transparent)] lg:mask-none border-b border-(--border-color) lg:border-b-0 "
+          ref={featureListRef}
+          className="flex flex-row lg:min-h-0 w-full lg:flex-col self-center gap-1 lg:gap-0 overflow-x-auto scrollbar-none lg:overflow-y-auto mask-[linear-gradient(to_right,#000_85%,transparent)] lg:mask-none border-b border-(--border-color) lg:border-b-0"
         >
           {features.map((f, index) => (
             <button
@@ -69,7 +76,7 @@ export default function FeaturesSection() {
                 activeRef.current = index;
                 setActive(f.component);
               }}
-              className={`group flex gap-3 p-3 text-left cursor-pointer shrink-0 lg:shrink lg:w-full border-b-2 lg:border-b-0 lg:border-l-2 transition-colors duration-300 ${
+              className={`group flex gap-3 p-3 lg:p-5 text-left cursor-pointer shrink-0 lg:shrink lg:w-full border-b-2 lg:border-b-0 lg:border-l-2 transition-colors duration-300 ${
                 active === f.component
                   ? "border-(--accent-primary)"
                   : "border-transparent lg:border-(--border-color)"
@@ -96,6 +103,15 @@ export default function FeaturesSection() {
               </span>
             </button>
           ))}
+        </div>
+        <div className="flex flex-col items-center justify-start w-full p-6 min-h-48 lg:min-h-0 lg:h-full lg:overflow-y-auto">
+          <h2 className="text-lg font-semibold text-(--text-primary) tracking-tight mb-2">
+            {features[activeRef.current].feature}
+          </h2>
+          <p className="text-sm text-(--text-secondary) leading-relaxed">
+            {features[activeRef.current].text}
+          </p>
+          {active && components[active]}
         </div>
       </div>
     </section>
