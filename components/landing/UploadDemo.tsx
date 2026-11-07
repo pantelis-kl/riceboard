@@ -1,7 +1,7 @@
 "use client";
 //import icons
-import { Upload,FileText,Dot } from "lucide-react";
-import { useState } from "react";
+import { Upload,FileText,Dot,X } from "lucide-react";
+import { useRef, useState } from "react";
 
 const validFiles=/\.(csv|txt|md)$/i;
 
@@ -17,6 +17,8 @@ function parse(text: string) {
 export default function UploadDemo() {
 
     const[file,setFile]=useState<{name:string,features:string[]} | null>(null);
+    const [drag,setDrag]=useState(false);
+    const inputRef=useRef<HTMLInputElement>(null);
     const [error,setError]=useState<string | null>(null);
 
     const handleFile= async (file:File | undefined)=>{
@@ -30,10 +32,20 @@ export default function UploadDemo() {
 
     }
 
+    const closeFile=()=>{
+        setFile(null);
+        setError(null);
+        if(inputRef.current) inputRef.current.value="";
+    }
+
   return (
     <div className="flex flex-col gap-3 w-full mt-3">
       {file ? (
         <div className="flex items-center flex-col gap-3 w-full p-4 rounded-xl border border-(--border-color) bg-(--bg-surface) shadow-sm">
+            <button className="ml-auto text-(--text-primary) cursor-pointer hover:text-red-500"
+            onClick={closeFile}>
+                <X className="size-4 shrink-0"/>
+            </button>
           <div className="flex w-full justify-baseline items-start gap-3">
             <FileText className="size-5 shrink-0 text-(--text-secondary)" />
             <div className="flex flex-col items-start w-full lg:flex-row">
@@ -61,7 +73,19 @@ export default function UploadDemo() {
           }
         </div>
       ) : (
-        <label className="flex flex-col items-center justify-center h-32 px-4 transition border-2 border-dashed rounded-xl border-(--border-color) bg-(--bg-surface)/50 hover:bg-(--bg-surface) hover:border-purple-500/50 cursor-pointer group">
+        <label
+        onDragOver={e=>{
+            e.preventDefault();
+            setDrag(true)
+        }}
+        onDragLeave={e=>setDrag(false)}
+        onDrop={e=>{
+            e.preventDefault();
+            setDrag(false);
+            handleFile(e.dataTransfer.files?.[0])
+        }}
+         className={`flex flex-col items-center justify-center h-32 px-4 transition border-2 border-dashed rounded-xl hover:bg-(--bg-surface) hover:border-purple-500/50 cursor-pointer group
+         ${drag?"border-purple-500/50 bg-purple-500/10":" border-(--border-color) bg-(--bg-surface)/50"}`}>
           <div className="flex flex-col items-center justify-center pt-5 pb-6 text-center">
             <Upload className="text-(--text-primary)" />
             <p className="text-xs font-medium text-(--text-primary)">
@@ -75,6 +99,7 @@ export default function UploadDemo() {
             </p>
           </div>
           <input
+            ref={inputRef}
             type="file"
             accept=".csv,.txt,.md"
             className="sr-only"
