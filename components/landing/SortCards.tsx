@@ -1,10 +1,10 @@
 "use client";
-//import transition
-import { Transition } from "motion";
 import { useReducedMotion } from "motion/react";
 import * as motion from "motion/react-client";
 //import hooks
 import { useEffect, useState } from "react";
+//import features type
+import { featuresScore  as features } from "@/data/features";
 
 type FeaturesProps = {
   id: number;
@@ -12,7 +12,7 @@ type FeaturesProps = {
   score: number;
 };
 
-export default function SortCards({ features }: { features: FeaturesProps[] }) {
+export default function SortCards () {
   const [updatedFeatures, setUpdatedFeatures] = useState(features);
   const sortedFeatures = [...updatedFeatures].sort((a, b) => b.score - a.score);
   const reduceMotion=useReducedMotion();
