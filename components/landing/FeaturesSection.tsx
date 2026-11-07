@@ -6,11 +6,13 @@ import { useEffect, useRef, useState } from "react";
 //import components
 import UploadDemo from "./UploadDemo";
 import SortCards from "./SortCards";
+import VoteDemo from "./VoteDemo";
 //import from motion
 import { AnimatePresence, motion } from "motion/react";
 
 const components:Record<string, React.ReactNode>={
     upload:<UploadDemo/>,
+    vote:<VoteDemo/>,
     ranking:<SortCards/>,
 }
 
@@ -124,7 +126,7 @@ export default function FeaturesSection() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.2 }}
-                className="mt-3"
+                className="mt-3 w-full"
               >
                 {active && components[active]}
               </motion.div>
