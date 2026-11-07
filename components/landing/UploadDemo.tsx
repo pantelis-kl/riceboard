@@ -54,7 +54,7 @@ export default function UploadDemo() {
   };
 
   return (
-    <div className="flex flex-col gap-3 w-full mt-3">
+    <div className="flex flex-col gap-3 w-full">
       {file ? (
         <div className="flex items-center flex-col gap-3 w-full p-4 rounded-xl border border-(--border-color) bg-(--bg-surface) shadow-sm">
           <button
@@ -78,7 +78,7 @@ export default function UploadDemo() {
             {file.features.slice(0, 5).map((f) => (
               <li
                 key={f}
-                className="flex items-center text-xs lg:text-sm gap-2 border-b border-(--border-color) py-2 text-(--text-primary)"
+                className="flex items-center text-xs sm:text-sm gap-2 border-b border-(--border-color) py-2 text-(--text-primary)"
               >
                 <Dot className="size-6 shrink-0" />
                 <span className="truncate">{f}</span>
