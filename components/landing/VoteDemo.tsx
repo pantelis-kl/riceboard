@@ -2,7 +2,7 @@
 //import hooks
 import { useState } from "react";
 //import icons
-import { ArrowRight } from "lucide-react";
+import { ArrowRight,ArrowLeft } from "lucide-react";
 //import components
 import RiceResults from "./RiceResults";
 
@@ -22,6 +22,7 @@ export default function VoteDemo() {
   const [confirm,setConfirm]=useState(false);
   const rice=Number(Math.round((selectedFeature.reach*selectedFeature.impact*(selectedFeature.confidence)/100)/selectedFeature.effort));
   const isLast=activeFeature===updatedData.length-1;
+  const isFirst=activeFeature===0
   const ranking = [...finalRice].sort((a, b) => b.rice - a.rice);
 
   const updateRice=(key:'reach' | 'impact' | 'confidence' | 'effort',value:number)=>{
@@ -33,8 +34,6 @@ export default function VoteDemo() {
     ...f.filter((x) => x.feature !== selectedFeature.feature),
     { feature: selectedFeature.feature, rice },
   ]);
-
-  if (!isLast) setActiveFeature((a) => a + 1);
 };
 
   return (
@@ -171,12 +170,28 @@ export default function VoteDemo() {
           {rice.toLocaleString()}
         </span>
       </div>
+      <div className="flex flex-row justify-between">
+      {!isFirst && (
+        <button
+        onClick={()=>{
+          calculateActiveRice();
+          if(!isFirst) setActiveFeature(a=>a-1) 
+        }}
+        className="group flex items-center justify-center px-2 text-xs sm:text-sm sm:px-4 py-2 font-medium self-start text-(--text-primary) cursor-pointer hover:text-(--accent-primary)"
+        >
+           <ArrowLeft className="sm:mr-2 size-4 text-(--text-primary) group-hover:text-(--accent-primary)"/>
+          Previous Feature
+        </button>
+      )}
       {!isLast ?(
         <button
-      onClick={calculateActiveRice} 
-      className="group flex items-center justify-center px-4 py-2 text-sm font-medium self-end text-(--text-primary) cursor-pointer hover:text-(--accent-primary)">
+      onClick={()=>{
+        calculateActiveRice();
+        if(!isLast) setActiveFeature(a=>a+1);
+      }} 
+      className="group flex items-center ml-auto text-xs justify-center px-2 sm:px-4 py-2 sm:text-sm font-medium self-end text-(--text-primary) cursor-pointer hover:text-(--accent-primary)">
         Next Feature
-        <ArrowRight className="ml-2 size-4 text-(--text-primary) group-hover:text-(--accent-primary)" />
+        <ArrowRight className="sm:ml-2 size-4 text-(--text-primary) group-hover:text-(--accent-primary)" />
       </button>
       ):
       (
@@ -190,6 +205,7 @@ export default function VoteDemo() {
       </button>
       )
       }
+      </div>
       </>
        )
        }
