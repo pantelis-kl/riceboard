@@ -35,3 +35,47 @@
 html{
   scroll-behavior: smooth;
 }
+
+.rice-range {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+}
+
+.rice-range::-webkit-slider-runnable-track {
+  height: 0.375rem;
+  border-radius: 0.5rem;
+  background: linear-gradient(
+    to right,
+    var(--accent-primary) var(--p),
+    var(--border-color) var(--p)
+  );
+}
+.rice-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  margin-top: -5px;
+  border: 0;
+  border-radius: 9999px;
+  background: var(--accent-primary);
+}
+
+.rice-range::-moz-range-track {
+  height: 0.375rem;
+  border-radius: 0.5rem;
+  background: var(--border-color);
+}
+.rice-range::-moz-range-progress {
+  height: 0.375rem;
+  border-radius: 0.5rem;
+  background: var(--accent-primary);
+}
+.rice-range::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border: 0;
+  border-radius: 9999px;
+  background: var(--accent-primary);
+}
