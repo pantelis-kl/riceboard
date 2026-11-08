@@ -5,14 +5,8 @@ import { useState } from "react";
 import { ArrowRight,ArrowLeft } from "lucide-react";
 //import components
 import RiceResults from "./RiceResults";
-
-const demoData=[
-    {id:1, feature: "Dark theme",reach:2300, impact:1.5 , confidence:60,effort: 6 },
-    {id:2,  feature: "Export to CSV",reach:1200, impact:2 , confidence:90,effort: 2},
-    {id:3,  feature: "Push notifications", reach:4000, impact:3 , confidence:100,effort: 7 },
-    {id:4,  feature: "Drag & Drop", reach:3700, impact:1 , confidence:50,effort: 4 },
-    {id:5,  feature: "Auto save", reach:2200, impact:0.5 , confidence:50,effort: 9 }
-]
+//import demo data
+import { demoData } from "@/data/vote";
 
 export default function VoteDemo() {
   const [activeFeature, setActiveFeature] = useState(0);
@@ -39,7 +33,7 @@ export default function VoteDemo() {
   return (
     <div className="flex flex-col gap-2 w-full">
       {confirm?
-        <RiceResults data={ranking}/>
+        <RiceResults data={ranking} setConfirm={setConfirm} setFinalRice={setFinalRice} setActiveFeature={setActiveFeature} setUpdatedData={setUpdateData}/>
        :(
         <>
         <div className="flex items-center justify-between">
