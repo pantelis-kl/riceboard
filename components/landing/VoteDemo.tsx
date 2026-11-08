@@ -5,6 +5,7 @@ import { useState } from "react";
 import { ArrowRight,ArrowLeft } from "lucide-react";
 //import components
 import RiceResults from "./RiceResults";
+import RiceRange from "./RiceRange";
 //import demo data
 import { demoData } from "@/data/vote";
 
@@ -53,7 +54,7 @@ export default function VoteDemo() {
           <div className="flex items-center justify-between">
             <label
               htmlFor="reach"
-              className="text-sm font-medium text-(--text-primary)"
+              className="text-sm font-medium text-(--text-secondary)"
             >
               Reach
             </label>
@@ -61,15 +62,13 @@ export default function VoteDemo() {
               {selectedFeature.reach.toLocaleString()}
             </span>
           </div>
-          <input
-            type="range"
+         <RiceRange
             id="reach"
             min={100}
             max={5000}
             step={100}
             value={selectedFeature.reach}
-            onChange={(e) => updateRice("reach", Number(e.target.value))}
-            className="w-full h-1.5 bg-(--border-color) rounded-lg appearance-none cursor-pointer accent-purple-500"
+            onChange={(v) => updateRice("reach", v)}
           />
           <div className="flex justify-between text-xs text-(--text-secondary)">
             <p>Few users</p>
@@ -88,15 +87,13 @@ export default function VoteDemo() {
               {selectedFeature.impact.toLocaleString()}
             </span>
           </div>
-          <input
-            type="range"
+          <RiceRange
             id="impact"
             min={1}
             max={3}
             step={0.5}
             value={selectedFeature.impact}
-            onChange={(e) => updateRice("impact", Number(e.target.value))}
-            className="w-full h-1.5 bg-(--border-color) rounded-lg appearance-none cursor-pointer accent-purple-500"
+            onChange={(v) => updateRice("impact", v)}
           />
           <div className="flex justify-between text-xs text-(--text-secondary)">
             <p>Minimal</p>
@@ -115,15 +112,13 @@ export default function VoteDemo() {
               {selectedFeature.confidence.toLocaleString()}%
             </span>
           </div>
-          <input
-            type="range"
+          <RiceRange
             id="confidence"
             min={50}
             max={100}
             step={5}
             value={selectedFeature.confidence}
-            onChange={(e) => updateRice("confidence", Number(e.target.value))}
-            className="w-full h-1.5 bg-(--border-color) rounded-lg appearance-none cursor-pointer accent-purple-500"
+            onChange={(v) => updateRice("confidence", v)}
           />
           <div className="flex justify-between text-xs text-(--text-secondary)">
             <p>low</p>
@@ -142,15 +137,13 @@ export default function VoteDemo() {
               {selectedFeature.effort.toLocaleString()}
             </span>
           </div>
-          <input
-            type="range"
+          <RiceRange
             id="effort"
             min={1}
             max={12}
             step={1}
             value={selectedFeature.effort}
-            onChange={(e) => updateRice("effort", Number(e.target.value))}
-            className="w-full h-1.5 bg-(--border-color) rounded-lg appearance-none cursor-pointer accent-purple-500"
+            onChange={(v) => updateRice("effort", v)}
           />
           <div className="flex justify-between text-xs text-(--text-secondary)">
             <p>Few days</p>
