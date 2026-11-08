@@ -3,6 +3,8 @@
 import { useState } from "react";
 //import icons
 import { ArrowRight } from "lucide-react";
+//import components
+import RiceResults from "./RiceResults";
 
 const demoData=[
     {id:1, feature: "Dark theme",reach:2300, impact:1.5 , confidence:60,effort: 6 },
@@ -15,16 +17,33 @@ const demoData=[
 export default function VoteDemo() {
   const [activeFeature, setActiveFeature] = useState(0);
   const [updatedData,setUpdateData]=useState(demoData);
-  const selectedFeature=updatedData[activeFeature]
-  const rice=Number(Math.round((selectedFeature.reach*selectedFeature.impact*(selectedFeature.confidence)/100)/selectedFeature.effort))
+  const selectedFeature=updatedData[activeFeature];
+  const [finalRice,setFinalRice]=useState<{feature:string,rice:number}[]>([]);
+  const [confirm,setConfirm]=useState(false);
+  const rice=Number(Math.round((selectedFeature.reach*selectedFeature.impact*(selectedFeature.confidence)/100)/selectedFeature.effort));
+  const isLast=activeFeature===updatedData.length-1;
+  const ranking = [...finalRice].sort((a, b) => b.rice - a.rice);
 
   const updateRice=(key:'reach' | 'impact' | 'confidence' | 'effort',value:number)=>{
      setUpdateData((prev) => prev.map((u,index) => (activeFeature === index ? { ...u, [key]: value } : u)));
   }
 
+  const calculateActiveRice = () => {
+  setFinalRice((f) => [
+    ...f.filter((x) => x.feature !== selectedFeature.feature),
+    { feature: selectedFeature.feature, rice },
+  ]);
+
+  if (!isLast) setActiveFeature((a) => a + 1);
+};
+
   return (
     <div className="flex flex-col gap-2 w-full">
-      <div className="flex items-center justify-between">
+      {confirm?
+        <RiceResults data={ranking}/>
+       :(
+        <>
+        <div className="flex items-center justify-between">
         <h3 className="text-lg font-semibold text-(--text-primary) tracking-tight">
           {demoData[activeFeature].feature}
         </h3>
@@ -152,9 +171,28 @@ export default function VoteDemo() {
           {rice.toLocaleString()}
         </span>
       </div>
-      <button>
+      {!isLast ?(
+        <button
+      onClick={calculateActiveRice} 
+      className="group flex items-center justify-center px-4 py-2 text-sm font-medium self-end text-(--text-primary) cursor-pointer hover:text-(--accent-primary)">
         Next Feature
+        <ArrowRight className="ml-2 size-4 text-(--text-primary) group-hover:text-(--accent-primary)" />
       </button>
+      ):
+      (
+        <button
+        onClick={()=>{
+          calculateActiveRice();
+          setConfirm(true);
+        }}
+      className="flex items-center justify-center gap-2 self-end rounded-xl border px-4 py-2 text-sm font-medium cursor-pointer shadow-sm transition-all active:scale-[0.98] border-transparent bg-(--accent-primary) text-white hover:opacity-90">
+        See results
+      </button>
+      )
+      }
+      </>
+       )
+       }
     </div>
   );
 }
