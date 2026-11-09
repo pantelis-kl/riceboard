@@ -1,3 +1,4 @@
+import FeaturesSection from "@/components/landing/FeaturesSection";
 import Hero from "@/components/landing/Hero";
 import PrioritizeSection from "@/components/landing/VoteSection";
 
@@ -8,6 +9,7 @@ export default function Landing(){
         >
             <Hero/>
             <PrioritizeSection/>
+            <FeaturesSection/>
         </div>
      )
 }
