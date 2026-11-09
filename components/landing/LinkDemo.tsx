@@ -3,6 +3,7 @@
 import { Link, Check } from "lucide-react";
 //import hooks
 import { useState } from "react";
+import { motion } from "motion/react";
 
 const profiles=[
     {id:1,name:'You',color:"#3B82F6"},
@@ -13,6 +14,13 @@ const profiles=[
 const link = "Riceboard.com/s/a3h01s";
 export default function LinkDemo() {
   const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(link);
+      setCopied(true);
+    } catch {}
+  };
 
   return (
     <div className="w-full flex flex-col gap-2 p-4 rounded-2xl border border-(--border-color) bg-(--bg-surface) shadow-sm">
@@ -29,10 +37,7 @@ export default function LinkDemo() {
         </span>
         <button
           type="button"
-          onClick={() => {
-            navigator.clipboard.writeText(link);
-            setCopied(true);
-          }}
+          onClick={handleCopy}
           className="flex min-w-24 shrink-0 items-center justify-center gap-1.5 rounded-md bg-(--accent-primary) px-3 py-1.5 text-sm font-medium text-white cursor-pointer transition-opacity hover:opacity-90"
         >
           {copied ? (
@@ -44,39 +49,71 @@ export default function LinkDemo() {
           )}
         </button>
       </div>
-      <div className="flex flex-col gap-3 p-3 w-full">
-          <span className="text-xs font-semibold uppercase tracking-wider text-(--text-primary)">
-            Host
-          </span>
-         <div className="w-full bg-(--bg-surface) items-center p-2 rounded-2xl border border-(--border-color) shadow-sm flex flex-row gap-2">
-            <div className="flex items-center justify-center w-10 h-10 rounded-full bg-[#10B981] text-white font-semibold text-sm shadow-sm shrink-0">
-              A
-            </div>
+      {copied && (
+        <>
+          <div className="flex flex-col gap-3 p-3 w-full">
+            <span className="text-xs font-semibold uppercase tracking-wider text-(--text-primary)">
+              Host
+            </span>
+            <motion.div
+              initial={{ opacity: 0, y: -24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ type: "spring", stiffness: 260, damping: 22, delay: 0.1 }}
+              className="w-full bg-(--bg-surface) items-center p-2 rounded-2xl border border-(--border-color) shadow-sm flex flex-row gap-2"
+            >
+              <div className="flex items-center justify-center w-10 h-10 rounded-full bg-[#10B981] text-white font-semibold text-sm shadow-sm shrink-0">
+                A
+              </div>
               <div className="w-full flex justify-between">
                 <span className="text-sm font-semibold text-(--text-primary)">
-                Alex
-              </span>
-              <span className="text-xs flex items-center gap-1 text-(--text-secondary)">
-                <span className="w-2 h-2 rounded-full bg-emerald-500"/>
-                Joined
-              </span>
+                  Alex
+                </span>
+                <span className="text-xs flex items-center gap-1 text-(--text-secondary)">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                  Joined
+                </span>
               </div>
+            </motion.div>
           </div>
-        </div>
-        <div className="flex flex-col gap-4 p-3 w-full">
+          <div className="flex flex-col gap-4 p-3 w-full">
             <span className="text-xs font-semibold uppercase tracking-wider text-(--text-primary)">
-                Participants
+              Participants
             </span>
             <ul className="flex flex-col gap-2">
-                {profiles.map(p=>(
-                    <li key={p.id}
-                    className="w-full bg-(--bg-surface) items-center p-2 rounded-2xl border border-(--border-color) shadow-sm flex flex-row gap-2"
-                    >
-                        
-                    </li>
-                ))}
+              {profiles.map((p, index) => (
+                <motion.li
+                  key={p.id}
+                  initial={{ opacity: 0, y: -24 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 260,
+                    damping: 22,
+                    delay: 0.80 + index * 0.60,
+                  }}
+                  className="w-full bg-(--bg-surface) items-center p-2 rounded-2xl border border-(--border-color) shadow-sm flex flex-row gap-2"
+                >
+                  <div
+                    style={{ backgroundColor: p.color }}
+                    className="flex items-center justify-center w-10 h-10 rounded-full text-white font-semibold text-sm shadow-sm shrink-0"
+                  >
+                    {p.name.slice(0, 1)}
+                  </div>
+                  <div className="w-full flex justify-between">
+                    <span className="text-sm font-semibold text-(--text-primary)">
+                      {p.name}
+                    </span>
+                    <span className="text-xs flex items-center gap-1 text-(--text-secondary)">
+                      <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                      Joined
+                    </span>
+                  </div>
+                </motion.li>
+              ))}
             </ul>
-        </div>
-      </div>
+          </div>
+        </>
+      )}
+    </div>
   );
 }
