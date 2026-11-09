@@ -32,7 +32,7 @@ export default function PrioritizeSliders() {
             <input
               type="range"
               id="impact"
-              min={1}
+              min={0}
               max={10}
               step={1}
               value={selectedId.impact}
@@ -50,7 +50,7 @@ export default function PrioritizeSliders() {
             <input
               type="range"
               id="effort"
-              min={1}
+              min={0}
               max={10}
               step={1}
               value={selectedId.effort}
