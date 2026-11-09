@@ -37,8 +37,8 @@ type ShapeProps = {
 
 type PrioritizeScatterProps = {
   data: DataType[];
-  firstId: number;
-  setFirstId: Dispatch<SetStateAction<number>>;
+  firstId?: number;
+  setFirstId?: Dispatch<SetStateAction<number>>;
 };
 
 const mid = 5;

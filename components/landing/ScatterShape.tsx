@@ -13,8 +13,8 @@ type ScatterShapeProps = {
   cx?: number;
   cy?: number;
   payload?: DataType;
-  firstId: number;
-  setFirstId: Dispatch<SetStateAction<number>>;
+  firstId?: number;
+  setFirstId?: Dispatch<SetStateAction<number>>;
   setClickedPoint: Dispatch<SetStateAction<DataType | null>>;
   hoveredGroup: string | null;
   enterGroup: (key: string) => void;
@@ -54,7 +54,7 @@ export default function ScatterShape({
       }}
       onMouseLeave={leaveGroup}
       onClick={() => {
-        setFirstId(payload.id);
+        setFirstId?.(payload.id);
         setClickedPoint(payload);
         if (payload.groupKey) enterGroup(payload.groupKey);
       }}
