@@ -3,14 +3,6 @@ import Link from "next/link";
 import SortCards from "./SortCards";
 import Chips from "../ui/Chips";
 
-const features = [
-  { id: 1, name: "Dark theme", score: 60 },
-  { id: 2, name: "Export to CSV", score: 53 },
-  { id: 3, name: "Push notifications", score: 48 },
-  { id: 4, name: "Auto-save", score: 37 },
-  { id: 5, name: "Drag & Drop", score: 33 },
-];
-
 export default function Hero() {
   return (
     <section className="relative flex flex-col justify-start items-center w-full min-h-[calc(100vh-4rem)] px-4 lg:px-8 py-16 overflow-hidden bg-(--bg-primary)">
@@ -46,7 +38,7 @@ export default function Hero() {
             </Link>
           </div>
         </div>
-        <SortCards features={features} />
+        <SortCards/>
       </div>
     </section>
   );

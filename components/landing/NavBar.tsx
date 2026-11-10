@@ -9,7 +9,7 @@ import { useActiveHref } from "@/hooks/useActiveHref";
 
 const links = [
   { href: "#live-demo", name: "Live demo" },
-  { href: "#vote-simulator", name: "Vote simulator" },
+  { href: "#prioritize", name: "Prioritize" },
   { href: "#features", name: "Features" },
   { href: "#how-it-works", name: "How it works" },
 ];
