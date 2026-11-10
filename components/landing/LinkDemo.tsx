@@ -1,6 +1,6 @@
 "use client";
 //import icons
-import { Link, Check } from "lucide-react";
+import { Link, Check,X } from "lucide-react";
 //import hooks
 import { useState } from "react";
 import { motion } from "motion/react";
@@ -22,8 +22,18 @@ export default function LinkDemo() {
     } catch {}
   };
 
+  const close=()=>{
+    setCopied(false);
+  }
+
   return (
     <div className="w-full flex flex-col gap-2 p-4 rounded-2xl border border-(--border-color) bg-(--bg-surface) shadow-sm">
+      <button
+        className="ml-auto text-(--text-primary) cursor-pointer hover:text-red-500"
+        onClick={close}
+      >
+        <X className="size-4 shrink-0" />
+      </button>
       <span className="text-xs font-semibold tracking-wider text-(--text-secondary)">
         Session link
       </span>
@@ -49,6 +59,9 @@ export default function LinkDemo() {
           )}
         </button>
       </div>
+      <p className="text-xs text-(--text-secondary)">
+        Participants join with just a name. No account needed.
+      </p>
       {copied && (
         <>
           <div className="flex flex-col gap-3 p-3 w-full">
@@ -58,7 +71,12 @@ export default function LinkDemo() {
             <motion.div
               initial={{ opacity: 0, y: -24 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ type: "spring", stiffness: 260, damping: 22, delay: 0.1 }}
+              transition={{
+                type: "spring",
+                stiffness: 260,
+                damping: 22,
+                delay: 0.1,
+              }}
               className="w-full bg-(--bg-surface) items-center p-2 rounded-2xl border border-(--border-color) shadow-sm flex flex-row gap-2"
             >
               <div className="flex items-center justify-center w-10 h-10 rounded-full bg-[#10B981] text-white font-semibold text-sm shadow-sm shrink-0">
@@ -89,7 +107,7 @@ export default function LinkDemo() {
                     type: "spring",
                     stiffness: 260,
                     damping: 22,
-                    delay: 0.80 + index * 0.60,
+                    delay: 0.8 + index * 0.6,
                   }}
                   className="w-full bg-(--bg-surface) items-center p-2 rounded-2xl border border-(--border-color) shadow-sm flex flex-row gap-2"
                 >
