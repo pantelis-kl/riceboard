@@ -1,12 +1,15 @@
 "use client";
 //import features data
 import { features, FeaturesType } from "@/data/features";
+import {data} from "@/data/prioritize" 
 //import hooks
 import { useEffect, useRef, useState } from "react";
 //import components
 import UploadDemo from "./UploadDemo";
 import SortCards from "./SortCards";
 import VoteDemo from "./VoteDemo";
+import PrioritizeScatter from "./PrioritizeScatter";
+import LinkDemo from "./LinkDemo";
 //import from motion
 import { AnimatePresence, motion } from "motion/react";
 
@@ -14,6 +17,8 @@ const components:Record<string, React.ReactNode>={
     upload:<UploadDemo/>,
     vote:<VoteDemo/>,
     ranking:<SortCards/>,
+    link:<LinkDemo/>,
+    prioritize:<PrioritizeScatter data={data}/>
 }
 
 export default function FeaturesSection() {
