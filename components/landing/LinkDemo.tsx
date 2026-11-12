@@ -4,12 +4,8 @@ import { Link, Check,X } from "lucide-react";
 //import hooks
 import { useState } from "react";
 import { motion } from "motion/react";
-
-const profiles=[
-    {id:1,name:'You',color:"#3B82F6"},
-    {id:2,name:'Maria',color:"#8B5CF6"},
-    {id:3,name:'John',color:"#F59E0B"}
-];
+//import profiles data
+import { profiles } from "@/data/profiles";
 
 const link = "Riceboard.com/s/a3h01s";
 export default function LinkDemo() {
