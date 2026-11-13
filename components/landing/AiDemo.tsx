@@ -7,7 +7,7 @@ import { useState } from "react";
 //import icons
 import { Sparkles } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
-import TypingText from "./TypingText";
+import TypingText from "../ui/TypingText";
 
 const cellStyles = {
   none: "bg-(--border-color)/40 text-(--text-secondary) border-transparent",
