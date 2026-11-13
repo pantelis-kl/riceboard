@@ -21,7 +21,7 @@ export const insights: Insight[] = [
       maria: { rank: 3, level: "none" },
       john: { rank: 1, level: "big" },
     },
-    text: "Eleni rates the impact at 1, while Maria and Nikos say 3. Worth checking who this feature is really for.",
+    text: "John rates the impact at 1, while Maria and Alex say 3. Worth checking who this feature is really for.",
   },
   {
     id: 2,
@@ -32,7 +32,7 @@ export const insights: Insight[] = [
       maria: { rank: 3, level: "none" },
       john: { rank: 3, level: "none" },
     },
-    text: "Maria rates the impact at 1, while Nikos and Eleni say 3. Worth checking whether she sees a different user in mind.",
+    text: "Alex rates the impact at 1, while Maria and John say 3. Worth checking whether she sees a different user in mind.",
   },
   {
     id: 3,
@@ -43,7 +43,7 @@ export const insights: Insight[] = [
       maria: { rank: 2, level: "none" },
       john: { rank: 1, level: "minor" },
     },
-    text: "Eleni rates the impact at 1, while Maria and Nikos say 2. A small gap, but worth a quick check.",
+    text: "John rates the impact at 1, while Maria and Alex say 2. A small gap, but worth a quick check.",
   },
   {
     id: 4,
@@ -54,6 +54,6 @@ export const insights: Insight[] = [
       maria: { rank: 2, level: "minor" },
       john: { rank: 1, level: "none" },
     },
-    text: "Nikos rates the impact at 2, while Maria and Eleni say 1. A small gap that should be quick to settle.",
+    text: "Maria rates the impact at 2, while Alex and John say 1. A small gap that should be quick to settle.",
   },
 ];
