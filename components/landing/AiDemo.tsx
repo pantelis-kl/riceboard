@@ -4,6 +4,9 @@ import { insights } from "@/data/insights";
 import { insightsProfiles } from "@/data/profiles";
 //import hooks
 import { useState } from "react";
+//import icons
+import { Sparkles } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
 
 const cellStyles = {
   none: "bg-(--border-color)/40 text-(--text-secondary) border-transparent",
@@ -71,7 +74,7 @@ export default function AiDemo() {
             >
               {i.votes.john.rank}
             </div>
-            <div className="hidden lg:flex items-center justify-self-end">
+            <div className="hidden sm:flex items-center justify-self-end">
               <span
                 className={`px-2.5 py-0.5 rounded-full text-xs font-medium capitalize border ${
                   i.gap === "minor"
@@ -84,12 +87,42 @@ export default function AiDemo() {
             </div>
             <span
               title={i.gap === "minor" ? "Minor gap" : "Big gap"}
-              className={`block size-2.5 justify-self-end rounded-full lg:hidden ${
+              className={`block size-2.5 justify-self-end rounded-full sm:hidden ${
                 i.gap === "minor" ? "bg-amber-500" : "bg-red-500"
               }`}
             />
           </button>
         ))}
+      </div>
+      <div className="flex flex-col gap-2 p-4 rounded-xl border border-(--border-color) bg-(--bg-primary) w-full">
+        <div className="flex items-center justify-between gap-2">
+          <h3 className="text-sm flex items-center gap-1.5 font-semibold text-(--text-primary)">
+            <Sparkles className="size-4 shrink-0 text-(--accent-primary)" />
+            AI Alignment
+          </h3>
+        </div>
+        <motion.p
+          key={active}
+          initial={{ opacity: 0, y: 4 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -4 }}
+          transition={{ duration: 0.2, ease: "easeOut" }}
+          className="text-xs leading-relaxed text-(--text-secondary)"
+        >
+          {insights[active].feature}
+        </motion.p>
+        <AnimatePresence mode="wait">
+          <motion.p
+            key={active}
+            initial={{ opacity: 0, y: 4 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -4 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className="text-sm leading-relaxed text-(--text-secondary)"
+          >
+            {insights[active].text}
+          </motion.p>
+        </AnimatePresence>
       </div>
     </div>
   );
