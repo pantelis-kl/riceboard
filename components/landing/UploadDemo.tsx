@@ -97,7 +97,7 @@ export default function UploadDemo() {
             e.preventDefault();
             setDrag(true);
           }}
-          onDragLeave={(e) => setDrag(false)}
+          onDragLeave={() => setDrag(false)}
           onDrop={(e) => {
             e.preventDefault();
             setDrag(false);

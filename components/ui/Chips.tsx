@@ -1,6 +1,6 @@
 "use client";
 //import icons
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 //import hooks
 import { useState } from "react";
 //import motion

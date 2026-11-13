@@ -2,9 +2,6 @@
 //import hooks and types
 import {
   useState,
-  startTransition,
-  Dispatch,
-  SetStateAction,
   useEffect,
 } from "react";
 //import spring animation
