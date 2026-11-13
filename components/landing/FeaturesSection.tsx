@@ -10,6 +10,7 @@ import SortCards from "./SortCards";
 import VoteDemo from "./VoteDemo";
 import PrioritizeScatter from "./PrioritizeScatter";
 import LinkDemo from "./LinkDemo";
+import AiDemo from "./AiDemo";
 //import from motion
 import { AnimatePresence, motion } from "motion/react";
 
@@ -18,7 +19,8 @@ const components:Record<string, React.ReactNode>={
     vote:<VoteDemo/>,
     ranking:<SortCards/>,
     link:<LinkDemo/>,
-    prioritize:<PrioritizeScatter data={data}/>
+    prioritize:<PrioritizeScatter data={data}/>,
+    insights:<AiDemo/>
 }
 
 export default function FeaturesSection() {
