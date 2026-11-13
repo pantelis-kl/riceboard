@@ -8,7 +8,7 @@ export type Insight = {
 };
 
 export type Vote={
-   rank:number,level:string
+   rank:number,level:"none" | "minor" | "big"
 }
 
 export const insights: Insight[] = [
