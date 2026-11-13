@@ -7,6 +7,7 @@ import { useState } from "react";
 //import icons
 import { Sparkles } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
+import TypingText from "./TypingText";
 
 const cellStyles = {
   none: "bg-(--border-color)/40 text-(--text-secondary) border-transparent",
@@ -94,6 +95,16 @@ export default function AiDemo() {
           </button>
         ))}
       </div>
+      <div className="flex sm:hidden items-center gap-3 text-xs text-(--text-secondary)">
+        <div className="flex items-center gap-1">
+          <span className="size-2.5 rounded-full bg-amber-500" />
+          <span>Minor gap</span>
+        </div>
+        <div className="flex items-center gap-1">
+          <span className="size-2.5 rounded-full bg-red-500" />
+          <span>Big gap</span>
+        </div>
+      </div>
       <div className="flex flex-col gap-2 p-4 rounded-xl border border-(--border-color) bg-(--bg-primary) w-full">
         <div className="flex items-center justify-between gap-2">
           <h3 className="text-sm flex items-center gap-1.5 font-semibold text-(--text-primary)">
@@ -107,21 +118,12 @@ export default function AiDemo() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -4 }}
           transition={{ duration: 0.2, ease: "easeOut" }}
-          className="text-xs leading-relaxed text-(--text-secondary)"
+          className="text-xs leading-relaxed text-(--accent-primary) font-semibold"
         >
           {insights[active].feature}
         </motion.p>
         <AnimatePresence mode="wait">
-          <motion.p
-            key={active}
-            initial={{ opacity: 0, y: 4 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -4 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
-            className="text-sm leading-relaxed text-(--text-secondary)"
-          >
-            {insights[active].text}
-          </motion.p>
+          <TypingText text={insights[active].text} />
         </AnimatePresence>
       </div>
     </div>
