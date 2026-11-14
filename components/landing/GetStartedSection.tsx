@@ -1,6 +1,7 @@
 import { howItWorks } from "@/data/howItWorks";
 import CtaButtons from "./CtaButtons";
 import PrimaryCta from "../ui/PrimaryCta";
+import Link from "next/link";
 
 export default function GetStartedSection() {
   return (
@@ -39,8 +40,8 @@ export default function GetStartedSection() {
               className="relative grid grid-cols-[3.25rem_minmax(0,1fr)] gap-3.5 md:flex md:flex-col md:items-center md:text-center"
             >
               <div className="flex flex-col items-center">
-                <span className="relative z-10 flex size-13 lg:size-16 shrink-0 items-center justify-center rounded-full border border-(--border-color) bg-(--bg-surface) text-purple-500">
-                  <h.icon className="size-7 lg:size-10" />
+                <span className="relative z-10 flex size-13 md:size-16 shrink-0 items-center justify-center rounded-full border border-(--border-color) bg-(--bg-surface) text-purple-500">
+                  <h.icon className="size-7 md:size-10" />
                 </span>
                 {!isLast && (
                   <span
@@ -51,17 +52,17 @@ export default function GetStartedSection() {
               </div>
 
               <div
-                className={`min-w-0 pt-2 lg:pt-3 ${isLast ? "pb-0" : "pb-6 lg:pb-0"}`}
+                className={`min-w-0 pt-2 lg:pt-3 ${isLast ? "pb-0" : "pb-6 md:pb-0"}`}
               >
                 <div className="flex items-center gap-1.5 md:justify-center">
                   <span className="font-mono text-xs font-semibold text-purple-400">
                     {h.step}
                   </span>
-                  <h3 className="text-sm lg:text-base font-medium text-(--text-primary)">
+                  <h3 className="text-sm md:text-base font-medium text-(--text-primary)">
                     {h.title}
                   </h3>
                 </div>
-                <p className="mt-1.5 text-sm leading-relaxed text-(--text-secondary) lg:max-w-xs">
+                <p className="mt-1.5 text-sm leading-relaxed text-(--text-secondary) md:max-w-xs">
                   {h.text}
                 </p>
               </div>
@@ -69,7 +70,18 @@ export default function GetStartedSection() {
           );
         })}
       </ol>
-      <PrimaryCta classname=""/>
+      <div className="flex flex-col items-center gap-3 mt-5">
+        <PrimaryCta className="justify-center" />
+        <div className="flex items-center gap-1 text-sm text-(--text-secondary)">
+          <p>Already have a link?</p>
+          <Link
+            href="/session"
+            className="font-medium text-(--accent-primary) hover:underline"
+          >
+            Join Now
+          </Link>
+        </div>
+      </div>
     </section>
   );
 }
