@@ -50,7 +50,7 @@ export default function Chips() {
             </span>
             <ChevronDown
               className={`w-4 h-4 text-(--text-secondary) lg:hidden transition-transform duration-300 ${
-                open ? "rotate-180" : ""
+                open===index ? "rotate-180" : ""
               }`}
             />
           </button>
