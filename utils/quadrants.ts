@@ -9,6 +9,7 @@ type QuadrantType = {
 type QuadrantProps = {
   name: string;
   color: string;
+  hint:string
 };
 
 type DataType={
