@@ -1,6 +1,8 @@
+//import data
 import { howItWorks } from "@/data/howItWorks";
-import CtaButtons from "./CtaButtons";
+//import components
 import PrimaryCta from "../ui/PrimaryCta";
+//import link
 import Link from "next/link";
 
 export default function GetStartedSection() {
