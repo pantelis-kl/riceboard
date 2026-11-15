@@ -5,7 +5,7 @@ import PrimaryCta from "../ui/PrimaryCta";
 
 export default function Hero() {
   return (
-    <section className="relative flex flex-col justify-start items-center w-full min-h-[calc(100vh-4rem)] px-4 lg:px-8 py-16 overflow-hidden bg-(--bg-primary)">
+    <section className="relative flex flex-col justify-start items-center w-full py-10 px-4 lg:px-8 overflow-hidden bg-(--bg-primary)">
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-purple-500/10 dark:bg-purple-600/15 blur-[120px] rounded-full" />
         <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--border-color)_1px,transparent_1px),linear-gradient(to_bottom,var(--border-color)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-30" />

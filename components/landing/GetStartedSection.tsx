@@ -7,7 +7,7 @@ export default function GetStartedSection() {
   return (
     <section
       id="how-it-works"
-      className="relative isolate flex w-full flex-col items-center gap-10 px-4 py-20"
+      className="relative isolate flex w-full flex-col items-center gap-10 px-3 md:px-4 py-10"
     >
       <div
         aria-hidden="true"
