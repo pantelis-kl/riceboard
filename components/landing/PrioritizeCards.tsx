@@ -1,29 +1,47 @@
 "use client";
 
 import { DataType } from "@/data/prioritize";
+import { quadrant } from "@/data/quadrants";
+import { getQuadrant } from "@/utils/quadrants";
 import { Dispatch, SetStateAction } from "react";
 
-type PrioritizeCardsProps={
-    updateData:DataType[],
-    setFirstId:Dispatch<SetStateAction<number>>,
-    firstId:number
-}
+type PrioritizeCardsProps = {
+  updateData: DataType[];
+  setFirstId: Dispatch<SetStateAction<number>>;
+  firstId: number;
+};
 
-export default function PrioritizeCards({updateData,setFirstId,firstId}:PrioritizeCardsProps) {
-    return(
-        <div className="flex flex-row flex-wrap md:grid grid-cols-2 gap-2 lg:gap-3">
-          {updateData.map((u) => (
-            <div key={u.id}>
-              <button
-                type="button"
-                onClick={()=>setFirstId(u.id)}
-                className={`lg:px-4 w-full h-full min-h-10 lg:py-2 px-3 py-1.5 rounded-lg border text-xs md:text-sm font-medium text-(--text-primary) shadow-sm hover:border-purple-500/50 hover:bg-purple-500/5 transition-all duration-150 cursor-pointer
-                  ${firstId===u.id?"border-purple-500/50 bg-purple-500/5":"border-(--border-color) bg-(--bg-surface)"}`}
-              >
-                <span>{u.feature}</span>
-              </button>
-            </div>
-          ))}
-        </div>
-    )
+export default function PrioritizeCards({
+  updateData,
+  setFirstId,
+  firstId,
+}: PrioritizeCardsProps) {
+  return (
+    <div className="grid grid-cols-2 gap-2 md:grid-cols-3 md:gap-3">
+      {updateData.map((u) => {
+        const q = getQuadrant(u, quadrant);
+        const selected = firstId === u.id;
+
+        return (
+          <button
+            key={u.id}
+            type="button"
+            onClick={() => setFirstId(u.id)}
+            aria-pressed={selected}
+            className={`flex min-h-10 min-w-0 lg:w-full cursor-pointer items-center gap-2 rounded-lg border px-3 py-1.5 text-left text-xs font-medium text-(--text-primary) shadow-sm transition-colors duration-150 sm:text-sm lg:px-4 lg:py-2 ${
+              selected
+                ? "border-purple-500/50 bg-purple-500/5"
+                : "border-(--border-color) bg-(--bg-surface) hover:border-purple-500/50 hover:bg-purple-500/5"
+            }`}
+          >
+            <span
+              style={{ backgroundColor: q.color }}
+              className="size-2 shrink-0 rounded-full"
+            />
+            <span className="truncate">{u.feature}</span>
+          </button>
+        );
+      })}
+    </div>
+  );
 }
