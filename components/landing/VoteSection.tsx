@@ -5,7 +5,7 @@ export default function PrioritizeSection() {
   return (
     <section
       id="prioritize"
-      className="flex flex-col items-center gap-10 w-full px-4 py-10"
+      className="flex flex-col items-center gap-10 w-full px-3 md:px-4 py-10"
     >
       <div className="flex flex-col items-center text-center gap-3.5 max-w-3xl mx-auto">
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-(--text-primary) leading-tight">
