@@ -5,6 +5,7 @@ type RangeProps = {
   step: number;
   value: number;
   onChange: (value: number) => void;
+  className:string;
 };
 
 export default function RiceRange({
@@ -14,6 +15,7 @@ export default function RiceRange({
   step,
   value,
   onChange,
+  className
 }: RangeProps) {
   const p = ((value - min) / (max - min)) * 100;
 
@@ -26,7 +28,7 @@ export default function RiceRange({
       step={step}
       value={value}
       onChange={(e) => onChange(Number(e.target.value))}
-      className="rice-range w-full h-1.5 rounded-lg cursor-pointer"
+      className={className}
       style={{ "--p": `${p}%` } as React.CSSProperties}
     />
   );
