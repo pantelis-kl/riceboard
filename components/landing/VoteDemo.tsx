@@ -69,6 +69,7 @@ export default function VoteDemo() {
             step={100}
             value={selectedFeature.reach}
             onChange={(v) => updateRice("reach", v)}
+            className="rice-range w-full h-1.5 rounded-lg cursor-pointer"
           />
           <div className="flex justify-between text-xs text-(--text-secondary)">
             <p>Few users</p>
@@ -94,6 +95,7 @@ export default function VoteDemo() {
             step={0.5}
             value={selectedFeature.impact}
             onChange={(v) => updateRice("impact", v)}
+            className="rice-range w-full h-1.5 rounded-lg cursor-pointer"
           />
           <div className="flex justify-between text-xs text-(--text-secondary)">
             <p>Minimal</p>
@@ -119,6 +121,7 @@ export default function VoteDemo() {
             step={5}
             value={selectedFeature.confidence}
             onChange={(v) => updateRice("confidence", v)}
+            className="rice-range w-full h-1.5 rounded-lg cursor-pointer"
           />
           <div className="flex justify-between text-xs text-(--text-secondary)">
             <p>low</p>
@@ -144,6 +147,7 @@ export default function VoteDemo() {
             step={1}
             value={selectedFeature.effort}
             onChange={(v) => updateRice("effort", v)}
+            className="rice-range w-full h-1.5 rounded-lg cursor-pointer"
           />
           <div className="flex justify-between text-xs text-(--text-secondary)">
             <p>Few days</p>
