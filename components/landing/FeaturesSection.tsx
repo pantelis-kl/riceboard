@@ -14,15 +14,6 @@ import AiDemo from "./AiDemo";
 //import from motion
 import { AnimatePresence, motion } from "motion/react";
 
-const components:Record<string, React.ReactNode>={
-    upload:<UploadDemo/>,
-    vote:<VoteDemo/>,
-    ranking:<SortCards/>,
-    link:<LinkDemo/>,
-    prioritize:<PrioritizeScatter data={data}/>,
-    insights:<AiDemo/>
-}
-
 export default function FeaturesSection() {
   const [active, setActive] = useState<FeaturesType["component"]>(
     features[0].component,
@@ -30,6 +21,16 @@ export default function FeaturesSection() {
   const activeRef = useRef(0);
   const lastWheelAt = useRef(0);
   const featureListRef = useRef<HTMLDivElement>(null);
+  const [firstId,setFirstId]=useState(data[0].id);
+  const components:Record<string, React.ReactNode>={
+    upload:<UploadDemo/>,
+    vote:<VoteDemo/>,
+    ranking:<SortCards/>,
+    link:<LinkDemo/>,
+    prioritize:<PrioritizeScatter data={data} setFirstId={setFirstId} firstId={firstId}/>,
+    insights:<AiDemo/>
+}
+
 
   useEffect(() => {
     const featureList = featureListRef.current;
@@ -67,7 +68,7 @@ export default function FeaturesSection() {
   return (
     <section
       id="features"
-      className="flex flex-col items-center gap-10 w-full px-4 py-10"
+      className="flex flex-col items-center gap-10 w-full px-3 md:px-4 py-10"
     >
       <div className="flex flex-col items-center text-center gap-3.5 max-w-3xl mx-auto">
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-(--text-primary) leading-tight">
@@ -78,7 +79,7 @@ export default function FeaturesSection() {
           versus effort, and let AI surface alignment gaps before you build.
         </p>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:h-120 xl:w-6xl">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:min-h-140 xl:w-6xl">
         <div
           ref={featureListRef}
           className="flex flex-row lg:min-h-0 w-full lg:flex-col self-center gap-1 lg:gap-0 overflow-x-auto scrollbar-none lg:overflow-y-auto mask-[linear-gradient(to_right,#000_85%,transparent)] lg:mask-none border-b border-(--border-color) lg:border-b-0"
@@ -119,7 +120,7 @@ export default function FeaturesSection() {
             </button>
           ))}
         </div>
-        <div className="flex flex-col items-center justify-start w-full p-6 min-h-48 lg:min-h-0 lg:h-full">
+        <div className="flex flex-col items-center justify-start w-full min-h-48 lg:p-6 lg:min-h-0 lg:h-full">
           <h2 className="text-lg font-semibold text-(--text-primary) tracking-tight mb-2">
             {features[activeRef.current].feature}
           </h2>
