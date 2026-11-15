@@ -21,6 +21,8 @@ import {
 } from "recharts";
 //import components
 import ScatterShape from "./ScatterShape";
+import PrioritizeCards from "./PrioritizeCards";
+//import utils
 import { getQuadrant } from "@/utils/quadrants";
 //import features data type
 import { DataType } from "@/data/prioritize";
@@ -37,8 +39,8 @@ type ShapeProps = {
 
 type PrioritizeScatterProps = {
   data: DataType[];
-  firstId?: number;
-  setFirstId?: Dispatch<SetStateAction<number>>;
+  firstId: number;
+  setFirstId: Dispatch<SetStateAction<number>>;
 };
 
 const mid = 5;
@@ -266,6 +268,7 @@ export default function PrioritizeScatter({
           )}
         />
       </ScatterChart>
+      <PrioritizeCards updateData={data} setFirstId={setFirstId} firstId={firstId}/>
     </div>
   );
 }

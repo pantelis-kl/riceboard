@@ -5,6 +5,7 @@ import { useState } from "react";
 import PrioritizeScatter from "./PrioritizeScatter";
 //import features data
 import {data} from '@/data/prioritize';
+import RiceRange from "./RiceRange";
 
 export default function PrioritizeSliders() {
   const [updateData, setUpdateData] = useState(data);
@@ -16,11 +17,10 @@ export default function PrioritizeSliders() {
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div className="grid grid-cols-1 gap-4 lg:grid-cols-[16rem_minmax(0,1fr)] lg:gap-6">
       <div className="inline lg:hidden">
         <PrioritizeScatter data={updateData} firstId={firstId} setFirstId={setFirstId}/>
       </div>
-      <div className="flex flex-row gap-5 lg:gap-16 items-center justify-center">
         <div className="flex flex-col gap-2">
           <div className="flex flex-col gap-3">
             <label htmlFor="impact" className="text-(--text-primary)">
@@ -29,15 +29,14 @@ export default function PrioritizeSliders() {
                 {selectedId.impact}
               </span>
             </label>
-            <input
-              type="range"
-              id="impact"
-              min={0}
-              max={10}
-              step={1}
-              value={selectedId.impact}
-              onChange={(e) => updateScore("impact", Number(e.target.value))}
-              className="w-40 lg:w-50 accent-purple-500 cursor-pointer bg-(--border-color) rounded-lg h-2"
+            <RiceRange
+            id="impact"
+            min={0}
+            max={10}
+            step={1}
+            value={selectedId.impact}
+            onChange={e=>updateScore('impact',Number(e))}
+            className="rice-range w-full h-1.5 rounded-lg cursor-pointer"
             />
           </div>
           <div className="flex flex-col gap-3">
@@ -47,33 +46,18 @@ export default function PrioritizeSliders() {
                 {selectedId.effort}
               </span>
             </label>
-            <input
-              type="range"
-              id="effort"
-              min={0}
-              max={10}
-              step={1}
-              value={selectedId.effort}
-              onChange={(e) => updateScore("effort", Number(e.target.value))}
-              className="w-40 lg:w-50 accent-purple-500 cursor-pointer bg-(--border-color) rounded-lg h-2"
+            <RiceRange
+            id="effort"
+            min={0}
+            max={10}
+            step={1}
+            value={selectedId.effort}
+            onChange={e=>updateScore('effort',Number(e))}
+            className="rice-range w-full h-1.5 rounded-lg cursor-pointer"
             />
+
           </div>
         </div>
-        <div className="flex flex-row flex-wrap md:grid grid-cols-2 gap-2 lg:gap-3">
-          {updateData.map((u) => (
-            <div key={u.id}>
-              <button
-                type="button"
-                onClick={()=>setFirstId(u.id)}
-                className={`lg:px-4 w-full h-full min-h-10 lg:py-2 px-3 py-1.5 rounded-lg border text-xs md:text-sm font-medium text-(--text-primary) shadow-sm hover:border-purple-500/50 hover:bg-purple-500/5 transition-all duration-150 cursor-pointer
-                  ${firstId===u.id?"border-purple-500/50 bg-purple-500/5":"border-(--border-color) bg-(--bg-surface)"}`}
-              >
-                <span>{u.feature}</span>
-              </button>
-            </div>
-          ))}
-        </div>
-      </div>
       <div className="hidden lg:inline">
         <PrioritizeScatter data={updateData} firstId={firstId} setFirstId={setFirstId}/>
       </div>
