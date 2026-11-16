@@ -18,8 +18,9 @@ export default function FeaturesSection() {
   const [active, setActive] = useState<FeaturesType["component"]>(
     features[0].component,
   );
-  const activeRef = useRef(0);
   const lastWheelAt = useRef(0);
+  const activeIndex=features.findIndex(f=>f.component===active);
+  const current = features[activeIndex] ?? features[0];
   const featureListRef = useRef<HTMLDivElement>(null);
   const [firstId,setFirstId]=useState(data[0].id);
   const components:Record<string, React.ReactNode>={
@@ -42,10 +43,9 @@ export default function FeaturesSection() {
       const direction = Math.sign(event.deltaY);
       if (!direction) return;
 
-      const current = activeRef.current;
       if (
-        (direction < 0 && current === 0) ||
-        (direction > 0 && current === features.length - 1)
+        (direction < 0 && activeIndex === 0) ||
+        (direction > 0 && activeIndex === features.length - 1)
       ) {
         return;
       }
@@ -56,14 +56,12 @@ export default function FeaturesSection() {
       if (now - lastWheelAt.current < 450) return;
 
       lastWheelAt.current = now;
-      const next = current + direction;
-      activeRef.current = next;
-      setActive(features[next].component);
+      setActive(features[activeIndex + direction].component);
     };
 
     featureList.addEventListener("wheel", handleWheel, { passive: false });
     return () => featureList.removeEventListener("wheel", handleWheel);
-  }, []);
+  }, [activeIndex]);
 
   return (
     <section
@@ -84,12 +82,11 @@ export default function FeaturesSection() {
           ref={featureListRef}
           className="flex flex-row lg:min-h-0 w-full lg:flex-col self-center gap-1 lg:gap-0 overflow-x-auto scrollbar-none lg:overflow-y-auto mask-[linear-gradient(to_right,#000_85%,transparent)] lg:mask-none border-b border-(--border-color) lg:border-b-0"
         >
-          {features.map((f, index) => (
+          {features.map((f) => (
             <button
               key={f.id}
               type="button"
               onClick={() => {
-                activeRef.current = index;
                 setActive(f.component);
               }}
               className={`group flex gap-3 p-3 lg:p-5 text-left cursor-pointer shrink-0 lg:shrink lg:w-full border-b-2 lg:border-b-0 lg:border-l-2 transition-colors duration-300 ${
@@ -122,14 +119,14 @@ export default function FeaturesSection() {
         </div>
         <div className="flex flex-col items-center justify-start w-full min-h-48 lg:p-6 lg:min-h-0 lg:h-full">
           <h2 className="text-lg font-semibold text-(--text-primary) tracking-tight mb-2">
-            {features[activeRef.current].feature}
+            {current.feature}
           </h2>
           <p className="text-sm text-(--text-secondary) leading-relaxed">
-            {features[activeRef.current].text}
+            {current.text}
           </p>
           <AnimatePresence mode="wait" initial={false}>
             <motion.div
-                key={features[activeRef.current].id}
+                key={current.id}
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -8 }}
