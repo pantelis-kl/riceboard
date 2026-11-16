@@ -42,7 +42,7 @@ export default function UploadDemo() {
     if (file.size > 1_000_000)
       return setError("The file is too large (Max size:1MB)");
     const text = parse(await file.text());
-    if (!text.length) setError("The file is empty");
+    if (!text.length) return setError("The file is empty");
     setError(null);
     setFile({ name: file.name, features: text });
   };
@@ -103,7 +103,7 @@ export default function UploadDemo() {
             setDrag(false);
             handleFile(e.dataTransfer.files?.[0]);
           }}
-          className={`flex flex-col items-center justify-center h-32 px-4 transition border-2 border-dashed rounded-xl hover:bg-(--bg-surface) hover:border-purple-500/50 cursor-pointer group
+          className={`flex flex-col items-center justify-center h-40 px-4 transition border-2 border-dashed rounded-xl hover:bg-(--bg-surface) hover:border-purple-500/50 cursor-pointer group
          ${drag ? "border-purple-500/50 bg-purple-500/10" : " border-(--border-color) bg-(--bg-surface)/50"}`}
         >
           <div className="flex flex-col items-center justify-center pt-5 pb-6 text-center">
