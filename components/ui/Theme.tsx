@@ -1,9 +1,6 @@
 "use client";
-//import hooks and types
-import {
-  useState,
-  useEffect,
-} from "react";
+//import hooks
+import { useSyncExternalStore } from "react";
 //import spring animation
 import { spring } from "motion";
 //import animate view
@@ -11,28 +8,35 @@ import { AnimateView } from "motion/react-animate-view";
 //import icons
 import { Moon, Sun } from "lucide-react";
 
+const subscribeToTheme = (onStoreChange: () => void) => {
+  const observer = new MutationObserver(onStoreChange);
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["class"],
+  });
+  return () => observer.disconnect();
+};
+
+const getThemeSnapshot = () =>
+  document.documentElement.classList.contains("dark");
+
+const getServerThemeSnapshot = () => false;
+
 export default function Theme() {
-  const [dark, setDark] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    const root = document.documentElement;
-    setDark(root.classList.contains("dark"));
-  }, []);
-
-  if (!mounted) return null;
+  const dark = useSyncExternalStore(
+    subscribeToTheme,
+    getThemeSnapshot,
+    getServerThemeSnapshot,
+  );
 
   const toggleTheme = () => {
     const root = document.documentElement;
     if (root.classList.contains("dark")) {
       root.classList.remove("dark");
       localStorage.setItem("theme","light")
-      setDark(false);
     } else {
       root.classList.add("dark");
       localStorage.setItem("theme", "dark");
-      setDark(true);
     }
   };
 
