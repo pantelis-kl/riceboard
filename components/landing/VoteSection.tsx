@@ -1,3 +1,4 @@
+//import components
 import PrioritizeSliders from "./PrioritizeSliders";
 
 export default function PrioritizeSection() {

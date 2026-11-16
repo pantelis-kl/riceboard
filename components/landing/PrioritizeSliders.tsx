@@ -6,7 +6,9 @@ import PrioritizeScatter from "./PrioritizeScatter";
 import RiceRange from "./RiceRange";
 //import features data
 import {data} from '@/data/prioritize';
+//import utils
 import { getQuadrant } from "@/utils/quadrants";
+//import quadrant data
 import { quadrant } from "@/data/quadrants";
 
 export default function PrioritizeSliders() {

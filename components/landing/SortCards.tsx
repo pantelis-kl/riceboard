@@ -1,4 +1,5 @@
 "use client";
+//import from motion
 import { useReducedMotion } from "motion/react";
 import * as motion from "motion/react-client";
 //import hooks

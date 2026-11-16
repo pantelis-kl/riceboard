@@ -1,6 +1,7 @@
 "use client";
 //import icons
 import { Upload, FileText, Dot, X } from "lucide-react";
+//import hooks
 import { useRef, useState } from "react";
 
 const validFiles = /\.(csv|txt|md)$/i;

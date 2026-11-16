@@ -1,8 +1,10 @@
 "use client";
-
+//import data and type
 import { DataType } from "@/data/prioritize";
 import { quadrant } from "@/data/quadrants";
+//import utils
 import { getQuadrant } from "@/utils/quadrants";
+//import state types
 import { Dispatch, SetStateAction } from "react";
 
 type PrioritizeCardsProps = {

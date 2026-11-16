@@ -1,3 +1,4 @@
+//import motion
 import { motion } from "motion/react";
 
 export default function TypingText({text}:{text:string}){
