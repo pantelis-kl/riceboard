@@ -46,6 +46,8 @@ export default function HamburgerMenu({ links,active,setActive }: HamburgerMenuP
   <button 
     onClick={() => setOpen(!open)}
     aria-label="Toggle Navigation Menu"
+    aria-expanded={open}
+    aria-controls="mobile-navigation-menu"
     className="p-2 rounded-xl border border-(--border-color) text-(--text-primary) transition-colors"
   >
     {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
