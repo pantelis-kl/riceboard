@@ -42,6 +42,8 @@ export default function Chips() {
           <button
             type="button"
             onClick={() => toggleChip(index)}
+            aria-expanded={open === index}
+            aria-controls={`chip-description-${index}`}
             className="flex items-center justify-between gap-2 w-full text-left cursor-pointer lg:pointer-events-none"
           >
             <span>
@@ -57,6 +59,7 @@ export default function Chips() {
           <AnimatePresence initial={false}>
             {open===index && (
               <motion.div
+              id={`chip-description-${index}`}
                 initial={{ height: 0, opacity: 0 }}
                 animate={{ height: "auto", opacity: 1 }}
                 exit={{ height: 0, opacity: 0 }}
