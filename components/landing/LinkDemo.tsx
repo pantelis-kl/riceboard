@@ -10,12 +10,16 @@ import { profiles } from "@/data/profiles";
 const link = "Riceboard.com/s/a3h01s";
 export default function LinkDemo() {
   const [copied, setCopied] = useState(false);
+  const [error,setError]=useState<string | null>(null)
 
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(link);
       setCopied(true);
-    } catch {}
+      setError(null)
+    } catch {
+      setError("Copy failed — select and copy manually")
+    }
   };
 
   const close=()=>{
@@ -58,6 +62,9 @@ export default function LinkDemo() {
       <p className="text-xs text-(--text-secondary)">
         Participants join with just a name. No account needed.
       </p>
+      {error && (
+        <p className="text-red-600 dark:text-red-400 text-sm self-center">{error}</p>
+      )}
       {copied && (
         <>
           <div className="flex flex-col gap-3 p-3 w-full">
