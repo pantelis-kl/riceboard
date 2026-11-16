@@ -33,7 +33,7 @@ export default function ScatterShape({
   leaveGroup,
 }: ScatterShapeProps) {
   const reduceMotion = useReducedMotion() ?? false;
-  if (!cx || !cy || !payload) return null;
+  if (cx == null || cy == null || !payload) return null;
   const color = getQuadrant(payload, quadrant).color;
   const selectedId = payload.id === firstId;
   const spring = reduceMotion
@@ -45,19 +45,34 @@ export default function ScatterShape({
   const dir = payload.effort < 3 ? 1 : -1;
   const x = cx + (spread ? dir * index * 26 : 0);
   const y = cy;
+  const activate = () => {
+    setFirstId?.(payload.id);
+    setClickedPoint(payload);
+  };
   return (
     <g
+      role="button"
+      tabIndex={0}
+      focusable={true}
+      aria-label={`${payload.feature}: impact ${payload.impact}, effort ${payload.effort}`}
+      aria-pressed={selectedId}
+      onClick={activate}
+      onKeyDownCapture={(event) => {
+        const isSpace =
+          event.code === "Space" ||
+          event.key === " " ||
+          event.key === "Spacebar";
+        if (event.key === "Enter" || isSpace) {
+          event.preventDefault();
+          activate();
+        }
+      }}
       data-dot
       onMouseEnter={() => {
         setClickedPoint(null);
         if (payload.groupKey) enterGroup(payload.groupKey);
       }}
       onMouseLeave={leaveGroup}
-      onClick={() => {
-        setFirstId?.(payload.id);
-        setClickedPoint(payload);
-        if (payload.groupKey) enterGroup(payload.groupKey);
-      }}
       style={{ cursor: "pointer" }}
     >
       {selectedId && (
