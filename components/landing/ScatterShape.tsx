@@ -45,10 +45,7 @@ export default function ScatterShape({
   const dir = payload.effort < 3 ? 1 : -1;
   const x = cx + (spread ? dir * index * 26 : 0);
   const y = cy;
-  const activate = () => {
-    setFirstId?.(payload.id);
-    setClickedPoint(payload);
-  };
+  
   return (
     <g
       role="button"
@@ -56,7 +53,6 @@ export default function ScatterShape({
       focusable={true}
       aria-label={`${payload.feature}: impact ${payload.impact}, effort ${payload.effort}`}
       aria-pressed={selectedId}
-      onClick={activate}
       onKeyDownCapture={(event) => {
         const isSpace =
           event.code === "Space" ||
@@ -64,7 +60,9 @@ export default function ScatterShape({
           event.key === "Spacebar";
         if (event.key === "Enter" || isSpace) {
           event.preventDefault();
-          activate();
+          setFirstId?.(payload.id);
+          setClickedPoint(payload);
+          if (payload.groupKey) enterGroup(payload.groupKey);
         }
       }}
       data-dot
@@ -73,6 +71,11 @@ export default function ScatterShape({
         if (payload.groupKey) enterGroup(payload.groupKey);
       }}
       onMouseLeave={leaveGroup}
+      onClick={() => {
+        setFirstId?.(payload.id);
+        setClickedPoint(payload);
+        if (payload.groupKey) enterGroup(payload.groupKey);
+      }}
       style={{ cursor: "pointer" }}
     >
       {selectedId && (

@@ -32,7 +32,7 @@ export const insights: Insight[] = [
       maria: { rank: 3, level: "none" },
       john: { rank: 3, level: "none" },
     },
-    text: "Alex rates the impact at 1, while Maria and John say 3. Worth checking whether she sees a different user in mind.",
+    text: "Alex rates the impact at 1, while Maria and John say 3. Worth checking whether he sees a different user in mind.",
   },
   {
     id: 3,
