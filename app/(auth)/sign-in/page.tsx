@@ -4,17 +4,25 @@ import Logo from "@/components/ui/Logo";
 //import link
 import Link from "next/link";
 //import icons
-import { Mail, Lock, Eye, EyeOff } from "lucide-react";
+import { Mail, Lock, Eye, EyeOff, Loader2, ArrowLeft } from "lucide-react";
 import { useState } from "react";
+import { useFormStatus } from "react-dom";
 
 export default function SignIn() {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="w-full max-w-[500px] flex flex-col gap-8 sm:gap-10 rounded-2xl border border-(--border-color) bg-(--bg-surface) p-6 sm:p-8 shadow-sm">
-      <Link href="/" aria-label="Back to home">
+    <div className="w-full max-w-[500px] flex flex-col gap-6 rounded-2xl border border-(--border-color) bg-(--bg-surface) p-6 sm:p-8 shadow-sm">
+      <div className="flex flex-col gap-3">
+        <Link
+          href="/"
+          className="inline-flex items-center gap-1.5 text-xs text-(--text-secondary) hover:text-(--text-primary) transition-colors"
+        >
+          <ArrowLeft className="size-3.5" />
+          <span>Back to home</span>
+        </Link>
         <Logo />
-      </Link>
+      </div>
       <div className="flex flex-col items-center gap-6 w-full">
         <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight text-center text-(--text-primary)">
           Sign In
@@ -70,12 +78,46 @@ export default function SignIn() {
                 )}
               </button>
             </div>
-            <Link href="/forgot-password" className="self-end text-xs text-(--text-secondary) hover:text-(--accent-primary) transition-colors focus-visible:outline-none focus-visible:underline">
-               Forgot password?
+            <Link
+              href="/forgot-password"
+              className="self-end text-xs text-(--text-secondary) hover:text-(--accent-primary) transition-colors focus-visible:outline-none focus-visible:underline"
+            >
+              Forgot password?
             </Link>
           </div>
+          <SubmitButton />
         </form>
+        <p className="text-center text-xs text-(--text-secondary)">
+          Don&apos;t have an account?{" "}
+          <Link
+            href="/sign-up"
+            className="font-bold text-(--accent-primary) hover:underline focus-visible:outline-none focus-visible:underline"
+          >
+            Sign Up
+          </Link>
+        </p>
       </div>
     </div>
   );
 }
+
+const SubmitButton = () => {
+  const { pending } = useFormStatus();
+
+  return (
+    <button
+      type="submit"
+      disabled={pending}
+      className="mt-2 w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-white bg-(--accent-primary) text-sm font-medium hover:opacity-90 transition-all shadow-sm active:scale-[0.97] cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed disabled:active:scale-100"
+    >
+      {pending ? (
+        <>
+          <Loader2 className="size-4 animate-spin" />
+          <span>Signing in...</span>
+        </>
+      ) : (
+        "Sign In"
+      )}
+    </button>
+  );
+};
