@@ -116,6 +116,14 @@ export default function SignUp() {
           <PasswordRequirements passwordText={passwordText}/>
           <SubmitButton text="Sign Up" loadingText="Creating account ..."/>
         </form>
+        <p className="text-center text-xs text-(--text-secondary)">
+            Already have an account? {" "}
+            <Link href="/sign-in"
+            className="font-bold text-(--accent-primary) hover:underline focus-visible:outline-none focus-visible:underline"
+            >
+              Sign in
+            </Link>
+        </p>
       </div>
     </div>
   );
