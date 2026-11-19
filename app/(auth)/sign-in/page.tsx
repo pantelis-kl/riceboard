@@ -2,13 +2,13 @@
 //import components
 import Logo from "@/components/ui/Logo";
 import TogglePassword from "@/components/ui/TogglePassword";
+import SubmitButton from "@/components/ui/SubmitButton";
 //import link
 import Link from "next/link";
 //import icons
 import { Mail, Lock, Loader2, ArrowLeft, AlertCircle } from "lucide-react";
 //import hooks
 import { useActionState, useState } from "react";
-import { useFormStatus } from "react-dom";
 //import server actions
 import { signIn } from "@/actions/auth/actions";
 
@@ -109,7 +109,7 @@ export default function SignIn() {
             <span>{state.errors.form}</span>
           </div>
         )}
-          <SubmitButton />
+          <SubmitButton text="Sign In" loadingText="Signing in..."/>
         </form>
         <p className="text-center text-xs text-(--text-secondary)">
           Don&apos;t have an account?{" "}
@@ -124,24 +124,3 @@ export default function SignIn() {
     </div>
   );
 }
-
-const SubmitButton = () => {
-  const { pending } = useFormStatus();
-
-  return (
-    <button
-      type="submit"
-      disabled={pending}
-      className="mt-2 w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-white bg-(--accent-primary) text-sm font-medium hover:opacity-90 transition-all shadow-sm active:scale-[0.97] cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed disabled:active:scale-100"
-    >
-      {pending ? (
-        <>
-          <Loader2 className="size-4 animate-spin" />
-          <span>Signing in...</span>
-        </>
-      ) : (
-        "Sign In"
-      )}
-    </button>
-  );
-};
