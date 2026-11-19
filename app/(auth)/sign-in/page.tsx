@@ -1,13 +1,15 @@
 "use client";
 //import components
 import Logo from "@/components/ui/Logo";
+import TogglePassword from "@/components/ui/TogglePassword";
 //import link
 import Link from "next/link";
 //import icons
-import { Mail, Lock, Eye, EyeOff, Loader2, ArrowLeft, AlertCircle } from "lucide-react";
+import { Mail, Lock, Loader2, ArrowLeft, AlertCircle } from "lucide-react";
 //import hooks
 import { useActionState, useState } from "react";
 import { useFormStatus } from "react-dom";
+//import server actions
 import { signIn } from "@/actions/auth/actions";
 
 export default function SignIn() {
@@ -80,19 +82,7 @@ export default function SignIn() {
                 placeholder="Your password"
                 className="w-full pl-10 pr-10 py-2.5 rounded-xl border border-(--border-color) bg-(--bg-primary) text-sm text-(--text-primary) placeholder:text-(--text-secondary)/50 focus:outline-none focus:border-(--accent-primary) transition-colors"
               />
-              <button
-                type="button"
-                onClick={() => setOpen((prev) => !prev)}
-                aria-label={open ? "Hide password" : "Show password"}
-                aria-pressed={open}
-                className="absolute right-2.5 p-1.5 rounded-lg text-(--text-secondary) hover:text-(--text-primary) hover:bg-(--bg-surface) transition-colors cursor-pointer"
-              >
-                {open ? (
-                  <EyeOff className="size-4" />
-                ) : (
-                  <Eye className="size-4" />
-                )}
-              </button>
+              <TogglePassword open={open} setOpen={setOpen}/>
             </div>
             {state.errors.password && (
               <p
