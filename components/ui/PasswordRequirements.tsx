@@ -6,7 +6,7 @@ export default function PasswordRequirements({
 }: {
   passwordText: string;
 }) {
-  const minLength = passwordText.length <= 8;
+  const minLength = passwordText.length < 8;
   const hasNumber= /\d/.test(passwordText);
   const hasUppercase= /[A-Z]/.test(passwordText);
 
@@ -46,7 +46,7 @@ export default function PasswordRequirements({
         ) : (
             <X className="size-4 shrink-0" />
         )}
-        <p className="text-(--text-secondary)">Contains at least 1 number</p>
+        <p className="text-(--text-secondary)">Contains at least 1 uppercase letter</p>
       </div>
     </div>
   );
