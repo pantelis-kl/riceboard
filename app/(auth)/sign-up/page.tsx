@@ -1,11 +1,22 @@
+"use client";
 //import components
 import Logo from "@/components/ui/Logo";
+import PasswordRequirements from "@/components/ui/PasswordRequirements";
+import SubmitButton from "@/components/ui/SubmitButton";
+import TogglePassword from "@/components/ui/TogglePassword";
 //import icons
-import { ArrowLeft, User } from "lucide-react";
+import { ArrowLeft, Mail, User, Lock, LockKeyhole } from "lucide-react";
 //import link
 import Link from "next/link";
+//import hooks
+import { useState } from "react";
 
 export default function SignUp() {
+
+  const [open, setOpen] = useState(false);
+  const [openConfirm, setOpenConfirm] = useState(false);
+  const [passwordText,setPasswordText]=useState<string>("")
+
   return (
     <div className="w-full max-w-[500px] flex flex-col gap-6 rounded-2xl border border-(--border-color) bg-(--bg-surface) p-6 sm:p-8 shadow-sm">
       <div className="flex flex-col gap-3">
@@ -42,6 +53,68 @@ export default function SignUp() {
               />
             </div>
           </div>
+          <div className="flex flex-col gap-1.5 w-full">
+            <label
+              htmlFor="email"
+              className="text-xs font-medium text-(--text-secondary)"
+            >
+              Email
+            </label>
+            <div className="relative flex items-center">
+              <Mail className="pointer-events-none absolute left-3.5 size-4 text-(--text-secondary)" />
+              <input
+                id="email"
+                name="email"
+                type="email"
+                autoComplete="email"
+                placeholder="you@example.com"
+                className="w-full pl-10 pr-3.5 py-2.5 rounded-xl border border-(--border-color) bg-(--bg-primary) text-sm text-(--text-primary) placeholder:text-(--text-secondary)/50 focus:outline-none focus:border-(--accent-primary) transition-colors"
+              />
+            </div>
+          </div>
+          <div className="flex flex-col gap-1.5 w-full">
+            <label
+              htmlFor="password"
+              className="text-xs font-medium text-(--text-secondary)"
+            >
+              Password
+            </label>
+            <div className="relative flex items-center">
+              <Lock className="pointer-events-none absolute left-3.5 size-4 text-(--text-secondary)" />
+              <input
+                id="password"
+                name="password"
+                type={open ? "text" : "password"}
+                autoComplete="new-password"
+                placeholder="Your password"
+                onChange={e=>setPasswordText(e.target.value)}
+                className="w-full pl-10 pr-10 py-2.5 rounded-xl border border-(--border-color) bg-(--bg-primary) text-sm text-(--text-primary) placeholder:text-(--text-secondary)/50 focus:outline-none focus:border-(--accent-primary) transition-colors"
+              />
+              <TogglePassword open={open} setOpen={setOpen} />
+            </div>
+          </div>
+          <div className="flex flex-col gap-1.5 w-full">
+            <label
+              htmlFor="confirm_password"
+              className="text-xs font-medium text-(--text-secondary)"
+            >
+              Confirm Password
+            </label>
+            <div className="relative flex items-center">
+              <LockKeyhole className="pointer-events-none absolute left-3.5 size-4 text-(--text-secondary)" />
+              <input
+                id="confirm_password"
+                name="confirm_password"
+                type={openConfirm ? "text" : "password"}
+                autoComplete="new-password"
+                placeholder="Confirm your password"
+                className="w-full pl-10 pr-10 py-2.5 rounded-xl border border-(--border-color) bg-(--bg-primary) text-sm text-(--text-primary) placeholder:text-(--text-secondary)/50 focus:outline-none focus:border-(--accent-primary) transition-colors"
+              />
+              <TogglePassword open={openConfirm} setOpen={setOpenConfirm} />
+            </div>
+          </div>
+          <PasswordRequirements passwordText={passwordText}/>
+          <SubmitButton text="Sign Up" loadingText="Creating account ..."/>
         </form>
       </div>
     </div>
