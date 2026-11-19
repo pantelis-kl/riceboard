@@ -4,12 +4,15 @@ import Logo from "@/components/ui/Logo";
 //import link
 import Link from "next/link";
 //import icons
-import { Mail, Lock, Eye, EyeOff, Loader2, ArrowLeft } from "lucide-react";
-import { useState } from "react";
+import { Mail, Lock, Eye, EyeOff, Loader2, ArrowLeft, AlertCircle } from "lucide-react";
+//import hooks
+import { useActionState, useState } from "react";
 import { useFormStatus } from "react-dom";
+import { signIn } from "@/actions/auth/actions";
 
 export default function SignIn() {
   const [open, setOpen] = useState(false);
+  const [state,formAction]=useActionState(signIn,{errors:{}});
 
   return (
     <div className="w-full max-w-[500px] flex flex-col gap-6 rounded-2xl border border-(--border-color) bg-(--bg-surface) p-6 sm:p-8 shadow-sm">
@@ -27,7 +30,11 @@ export default function SignIn() {
         <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight text-center text-(--text-primary)">
           Sign In
         </h1>
-        <form className="flex flex-col gap-4 w-full text-left" noValidate>
+        <form
+          className="flex flex-col gap-4 w-full text-left"
+          noValidate
+          action={formAction}
+        >
           <div className="flex flex-col gap-1.5 w-full">
             <label
               htmlFor="email"
@@ -46,6 +53,15 @@ export default function SignIn() {
                 className="w-full pl-10 pr-3.5 py-2.5 rounded-xl border border-(--border-color) bg-(--bg-primary) text-sm text-(--text-primary) placeholder:text-(--text-secondary)/50 focus:outline-none focus:border-(--accent-primary) transition-colors"
               />
             </div>
+            {state.errors.email && (
+              <p
+                role="alert"
+                className="flex items-center gap-1.5 text-xs text-red-600 dark:text-red-400"
+              >
+                <AlertCircle className="size-3.5 shrink-0" />
+                <span>{state.errors.email}</span>
+              </p>
+            )}
           </div>
           <div className="flex flex-col gap-1.5 w-full">
             <label
@@ -78,6 +94,15 @@ export default function SignIn() {
                 )}
               </button>
             </div>
+            {state.errors.password && (
+              <p
+                role="alert"
+                className="flex items-center gap-1.5 text-xs text-red-600 dark:text-red-400"
+              >
+                <AlertCircle className="size-3.5 shrink-0" />
+                <span>{state.errors.password}</span>
+              </p>
+            )}
             <Link
               href="/forgot-password"
               className="self-end text-xs text-(--text-secondary) hover:text-(--accent-primary) transition-colors focus-visible:outline-none focus-visible:underline"
@@ -85,6 +110,15 @@ export default function SignIn() {
               Forgot password?
             </Link>
           </div>
+          {state.errors.form && (
+          <div
+            role="alert"
+            className="flex items-center justify-center gap-2 rounded-xl border border-red-500/30 bg-red-500/10 px-3.5 py-2.5 text-xs text-red-600 dark:text-red-400"
+          >
+            <AlertCircle className="size-4 shrink-0" />
+            <span>{state.errors.form}</span>
+          </div>
+        )}
           <SubmitButton />
         </form>
         <p className="text-center text-xs text-(--text-secondary)">
