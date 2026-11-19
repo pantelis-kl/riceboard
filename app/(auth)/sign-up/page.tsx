@@ -1,21 +1,24 @@
 "use client";
+//import server actions
+import { signUp } from "@/actions/auth/actions";
 //import components
 import Logo from "@/components/ui/Logo";
 import PasswordRequirements from "@/components/ui/PasswordRequirements";
 import SubmitButton from "@/components/ui/SubmitButton";
 import TogglePassword from "@/components/ui/TogglePassword";
 //import icons
-import { ArrowLeft, Mail, User, Lock, LockKeyhole } from "lucide-react";
+import { ArrowLeft, Mail, User, Lock, LockKeyhole, AlertCircle } from "lucide-react";
 //import link
 import Link from "next/link";
 //import hooks
-import { useState } from "react";
+import { useActionState, useState } from "react";
 
 export default function SignUp() {
 
   const [open, setOpen] = useState(false);
   const [openConfirm, setOpenConfirm] = useState(false);
-  const [passwordText,setPasswordText]=useState<string>("")
+  const [passwordText,setPasswordText]=useState<string>("");
+  const [state,formAction]=useActionState(signUp,{errors:{}})
 
   return (
     <div className="w-full max-w-[500px] flex flex-col gap-6 rounded-2xl border border-(--border-color) bg-(--bg-surface) p-6 sm:p-8 shadow-sm">
@@ -33,7 +36,9 @@ export default function SignUp() {
         <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight text-center text-(--text-primary)">
           Sign Up
         </h1>
-        <form className="flex flex-col gap-4 w-full text-left" noValidate>
+        <form className="flex flex-col gap-4 w-full text-left" noValidate
+        action={formAction}
+        >
           <div className="flex flex-col gap-1.5 w-full">
             <label
               htmlFor="full_name"
@@ -52,6 +57,15 @@ export default function SignUp() {
                 className="w-full pl-10 pr-3.5 py-2.5 rounded-xl border border-(--border-color) bg-(--bg-primary) text-sm text-(--text-primary) placeholder:text-(--text-secondary)/50 focus:outline-none focus:border-(--accent-primary) transition-colors"
               />
             </div>
+            {state.errors.full_name && (
+              <p
+                role="alert"
+                className="flex items-center gap-1.5 text-xs text-red-600 dark:text-red-400"
+              >
+                <AlertCircle className="size-3.5 shrink-0" />
+                <span>{state.errors.full_name}</span>
+              </p>
+            )}
           </div>
           <div className="flex flex-col gap-1.5 w-full">
             <label
@@ -71,6 +85,15 @@ export default function SignUp() {
                 className="w-full pl-10 pr-3.5 py-2.5 rounded-xl border border-(--border-color) bg-(--bg-primary) text-sm text-(--text-primary) placeholder:text-(--text-secondary)/50 focus:outline-none focus:border-(--accent-primary) transition-colors"
               />
             </div>
+             {state.errors.email && (
+              <p
+                role="alert"
+                className="flex items-center gap-1.5 text-xs text-red-600 dark:text-red-400"
+              >
+                <AlertCircle className="size-3.5 shrink-0" />
+                <span>{state.errors.email}</span>
+              </p>
+            )}
           </div>
           <div className="flex flex-col gap-1.5 w-full">
             <label
@@ -92,6 +115,15 @@ export default function SignUp() {
               />
               <TogglePassword open={open} setOpen={setOpen} />
             </div>
+            {state.errors.password && (
+              <p
+                role="alert"
+                className="flex items-center gap-1.5 text-xs text-red-600 dark:text-red-400"
+              >
+                <AlertCircle className="size-3.5 shrink-0" />
+                <span>{state.errors.password}</span>
+              </p>
+            )}
           </div>
           <div className="flex flex-col gap-1.5 w-full">
             <label
@@ -112,7 +144,25 @@ export default function SignUp() {
               />
               <TogglePassword open={openConfirm} setOpen={setOpenConfirm} />
             </div>
+            {state.errors.confirm_password && (
+              <p
+                role="alert"
+                className="flex items-center gap-1.5 text-xs text-red-600 dark:text-red-400"
+              >
+                <AlertCircle className="size-3.5 shrink-0" />
+                <span>{state.errors.confirm_password}</span>
+              </p>
+            )}
           </div>
+          {state.errors.form && (
+          <div
+            role="alert"
+            className="flex items-center justify-center gap-2 rounded-xl border border-red-500/30 bg-red-500/10 px-3.5 py-2.5 text-xs text-red-600 dark:text-red-400"
+          >
+            <AlertCircle className="size-4 shrink-0" />
+            <span>{state.errors.form}</span>
+          </div>
+        )}
           <PasswordRequirements passwordText={passwordText}/>
           <SubmitButton text="Sign Up" loadingText="Creating account ..."/>
         </form>
