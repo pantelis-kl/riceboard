@@ -107,7 +107,7 @@ export default function PrioritizeScatter({
   };
 
   return (
-    <div className="w-full p-2 rounded-2xl border border-(--border-color) bg-(--bg-surface) shadow-sm">
+    <div className="relative w-full overflow-hidden rounded-2xl border border-(--border-color) bg-(--bg-primary) p-3 sm:p-4">
       <ScatterChart
         responsive
         style={{

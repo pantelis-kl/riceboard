@@ -191,7 +191,7 @@ export default function VoteDemo() {
           calculateActiveRice();
           setConfirm(true);
         }}
-      className="flex items-center justify-center gap-2 self-end rounded-xl border px-4 py-2 text-sm font-medium cursor-pointer shadow-sm transition-all active:scale-[0.98] border-transparent bg-(--accent-primary) text-white hover:opacity-90">
+      className="flex items-center justify-center gap-2 self-end rounded-xl border px-4 py-2 text-sm font-medium cursor-pointer shadow-sm transition-all active:scale-[0.98] border-transparent bg-(--landing-accent-fill) text-(--landing-on-accent) hover:opacity-90">
         See results
       </button>
       )

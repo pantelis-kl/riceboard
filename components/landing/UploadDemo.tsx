@@ -104,8 +104,8 @@ export default function UploadDemo() {
             setDrag(false);
             handleFile(e.dataTransfer.files?.[0]);
           }}
-          className={`flex flex-col items-center justify-center h-40 px-4 transition border-2 border-dashed rounded-xl hover:bg-(--bg-surface) hover:border-purple-500/50 cursor-pointer group
-         ${drag ? "border-purple-500/50 bg-purple-500/10" : " border-(--border-color) bg-(--bg-surface)/50"}`}
+          className={`flex flex-col items-center justify-center h-40 px-4 transition border-2 border-dashed rounded-xl hover:bg-(--bg-surface) hover:border-(--accent-primary)/50 cursor-pointer group
+         ${drag ? "border-(--accent-primary)/50 bg-(--accent-primary)/10" : " border-(--border-color) bg-(--bg-surface)/50"}`}
         >
           <div className="flex flex-col items-center justify-center pt-5 pb-6 text-center">
             <Upload className="text-(--text-primary)" />

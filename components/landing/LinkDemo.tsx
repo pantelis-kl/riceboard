@@ -48,7 +48,7 @@ export default function LinkDemo() {
         <button
           type="button"
           onClick={handleCopy}
-          className="flex min-w-24 shrink-0 items-center justify-center gap-1.5 rounded-md bg-(--accent-primary) px-3 py-1.5 text-sm font-medium text-white cursor-pointer transition-opacity hover:opacity-90"
+          className="flex min-w-24 shrink-0 items-center justify-center gap-1.5 rounded-md bg-(--landing-accent-fill) px-3 py-1.5 text-sm font-medium text-(--landing-on-accent) cursor-pointer transition-opacity hover:opacity-90"
         >
           {copied ? (
             <>

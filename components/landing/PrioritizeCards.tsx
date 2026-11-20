@@ -32,8 +32,8 @@ export default function PrioritizeCards({
             aria-pressed={selected}
             className={`flex min-h-10 min-w-0 lg:w-full cursor-pointer items-center gap-2 rounded-lg border px-3 py-1.5 text-left text-xs font-medium text-(--text-primary) shadow-sm transition-colors duration-150 sm:text-sm lg:px-4 lg:py-2 ${
               selected
-                ? "border-purple-500/50 bg-purple-500/5"
-                : "border-(--border-color) bg-(--bg-surface) hover:border-purple-500/50 hover:bg-purple-500/5"
+                ? "border-(--accent-primary)/50 bg-(--accent-primary)/5"
+                : "border-(--border-color) bg-(--bg-surface) hover:border-(--accent-primary)/50 hover:bg-(--accent-primary)/5"
             }`}
           >
             <span

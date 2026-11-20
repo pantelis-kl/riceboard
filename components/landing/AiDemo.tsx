@@ -51,12 +51,12 @@ export default function AiDemo() {
           <button
             key={i.id}
             onClick={() => setActive(index)}
-            className={`group grid w-full items-center gap-1.5 sm:gap-2 grid-cols-[minmax(0,1fr)_repeat(3,2rem)_3.5rem] sm:grid-cols-[minmax(0,1fr)_repeat(3,2.75rem)_5.25rem] min-h-11 rounded-xl px-3 text-left border hover:border-purple-500/40 hover:bg-(--bg-surface)/80 transition-all cursor-pointer shadow-xs
-              ${active === index ? "border-purple-500/40 bg-(--bg-surface)/80" : "border-(--border-color) bg-(--bg-surface)"}`}
+            className={`group grid w-full items-center gap-1.5 sm:gap-2 grid-cols-[minmax(0,1fr)_repeat(3,2rem)_3.5rem] sm:grid-cols-[minmax(0,1fr)_repeat(3,2.75rem)_5.25rem] min-h-11 rounded-xl px-3 text-left border hover:border-(--accent-primary)/40 hover:bg-(--bg-surface)/80 transition-all cursor-pointer shadow-xs
+              ${active === index ? "border-(--accent-primary)/40 bg-(--bg-surface)/80" : "border-(--border-color) bg-(--bg-surface)"}`}
           >
             <span
-              className={`text-sm font-medium truncate group-hover:text-purple-400 transition-colors
-            ${active === index ? "text-purple-400" : "text-(--text-primary)"}`}
+              className={`text-sm font-medium truncate group-hover:text-(--accent-primary) transition-colors
+            ${active === index ? "text-(--accent-primary)" : "text-(--text-primary)"}`}
             >
               {i.feature}
             </span>
