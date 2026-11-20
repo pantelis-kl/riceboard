@@ -37,7 +37,7 @@ export default function Chips() {
           key={d.name}
           onHoverStart={() => openChip(index)}
           onHoverEnd={() => closeChip(index)}
-          className="flex flex-col rounded-lg px-3 py-1 border border-(--border-color) bg-(--bg-surface) text-sm font-medium text-(--text-primary) shadow-sm hover:border-purple-500/50 transition-colors overflow-hidden"
+          className="flex flex-col rounded-lg px-3 py-1 border border-(--border-color) bg-(--bg-surface) text-sm font-medium text-(--text-primary) shadow-sm hover:border-(--accent-primary)/50 transition-colors overflow-hidden"
         >
           <button
             type="button"
@@ -47,7 +47,7 @@ export default function Chips() {
             className="flex items-center justify-between gap-2 w-full text-left cursor-pointer lg:pointer-events-none"
           >
             <span>
-              <span className="font-bold text-purple-500">{d.name[0]}</span>
+              <span className="font-bold text-(--accent-primary)">{d.name[0]}</span>
               {d.name.slice(1)}
             </span>
             <ChevronDown

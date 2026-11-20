@@ -7,7 +7,7 @@ export default function PrimaryCta({className}:{className:string}){
         <div className={`flex items-center gap-3 ${className}`}>
             <Link
               href="/sign-up"
-              className="px-6 py-3.5 rounded-xl bg-(--accent-primary) text-white font-medium text-center hover:opacity-90 transition-all shadow-md hover:shadow-lg active:scale-[0.98]"
+              className="px-6 py-3.5 rounded-xl bg-(--landing-accent-fill) text-(--landing-on-accent) font-medium text-center hover:opacity-90 transition-all shadow-md hover:shadow-lg active:scale-[0.98]"
             >
               Get Started
             </Link>
