@@ -66,9 +66,12 @@ export default function FeaturesSection() {
   return (
     <section
       id="features"
-      className="flex flex-col items-center gap-10 w-full px-3 md:px-4 py-10"
+      className="relative flex w-full flex-col items-center gap-10 px-3 py-10 md:px-4"
     >
-      <div className="flex flex-col items-center text-center gap-3.5 max-w-3xl mx-auto">
+      <div
+        className="flex flex-col items-center text-center gap-3.5 max-w-3xl mx-auto"
+        data-reveal
+      >
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-(--text-primary) leading-tight">
           Features
         </h2>
@@ -77,10 +80,14 @@ export default function FeaturesSection() {
           versus effort, and let AI surface alignment gaps before you build.
         </p>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:min-h-140 xl:w-6xl">
+      <div
+        className="grid w-full max-w-6xl grid-cols-1 gap-6 rounded-3xl border border-[color-mix(in_srgb,var(--border-color)_82%,var(--accent-primary))] bg-[linear-gradient(145deg,color-mix(in_srgb,var(--accent-primary)_4%,transparent),transparent_38%),var(--bg-surface)] p-3 text-3xl p-3 shadow-[0_28px_80px_-48px_color-mix(in_srgb,var(--accent-primary)_28%,transparent)] backdrop-blur-xl sm:p-5 lg:h-[44rem] lg:grid-cols-[0.72fr_1.28fr] lg:gap-8 lg:p-7"
+        data-reveal
+      >
         <div
+          data-lenis-prevent
           ref={featureListRef}
-          className="flex flex-row lg:min-h-0 w-full lg:flex-col self-center gap-1 lg:gap-0 overflow-x-auto scrollbar-none lg:overflow-y-auto mask-[linear-gradient(to_right,#000_85%,transparent)] lg:mask-none border-b border-(--border-color) lg:border-b-0"
+          className="flex w-full flex-row gap-1 md:gap-4 justify-center lg:gap-1 self-center overflow-x-auto border-b border-(--border-color) mask-[linear-gradient(to_right,#000_85%,transparent)] scrollbar-none lg:h-full lg:self-stretch lg:grid lg:grid-rows-6 lg:overflow-y-auto lg:mask-none lg:border-b-0 lg:border-r lg:pr-5"
         >
           {features.map((f) => (
             <button
@@ -89,7 +96,7 @@ export default function FeaturesSection() {
               onClick={() => {
                 setActive(f.component);
               }}
-              className={`group flex gap-3 p-3 lg:p-5 text-left cursor-pointer shrink-0 lg:shrink lg:w-full border-b-2 lg:border-b-0 lg:border-l-2 transition-colors duration-300 ${
+              className={`group flex shrink-0 cursor-pointer gap-3 border-b-2 p-3 text-left transition-colors duration-300 lg:h-full lg:min-h-0 lg:w-full lg:border-b-0 lg:border-l-2 lg:p-4 ${
                 active === f.component
                   ? "border-(--accent-primary)"
                   : "border-transparent lg:border-(--border-color)"
@@ -101,7 +108,7 @@ export default function FeaturesSection() {
                 </span>
 
                 <span
-                  className={`hidden lg:grid transition-[grid-template-rows,opacity] duration-300 group-hover:grid-rows-[1fr] group-hover:opacity-100 ${
+                  className={`hidden overflow-hidden transition-[grid-template-rows,opacity] duration-300 lg:grid group-hover:grid-rows-[1fr] group-hover:opacity-100 ${
                     active === f.component
                       ? "grid-rows-[1fr] opacity-100"
                       : "grid-rows-[0fr] opacity-0"
@@ -117,8 +124,10 @@ export default function FeaturesSection() {
             </button>
           ))}
         </div>
-        <div className="flex flex-col items-center justify-start w-full min-h-48 lg:p-6 lg:min-h-0 lg:h-full">
-          <h2 className="text-lg font-semibold text-(--text-primary) tracking-tight mb-2">
+       <div
+  className="flex w-full flex-col items-center justify-start lg:h-full lg:min-h-0 lg:overflow-y-auto lg:p-6"
+>
+          <h2 className="text-lg font-semibold tracking-tight text-(--text-primary)">
             {current.feature}
           </h2>
           <p className="text-sm text-(--text-secondary) leading-relaxed">
