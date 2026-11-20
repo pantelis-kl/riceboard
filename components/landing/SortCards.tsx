@@ -51,7 +51,7 @@ export default function SortCards () {
             key={s.id}
             layout
             transition={{ type: "spring", stiffness: 350, damping: 30 }}
-            className="flex items-center justify-between p-4 rounded-xl border border-(--border-color) bg-(--bg-surface) text-(--text-primary) shadow-sm hover:border-purple-500/50 transition-colors"
+            className="flex items-center justify-between p-4 rounded-xl border border-(--border-color) bg-(--bg-surface) text-(--text-primary) shadow-sm hover:border-(--accent-primary)/50 transition-colors"
           >
             <div className="flex items-center gap-3">
               <span className="text-xs font-bold px-2 whitespace-nowrap py-1 rounded-md bg-(--border-color)/30 text-(--text-secondary)">
@@ -67,7 +67,7 @@ export default function SortCards () {
                     initial={false}
                     animate={{ width: `${s.score}%` }}
                     transition={{ type: 'spring', stiffness: 120, damping: 20 }}
-                    className="absolute top-0 left-0 h-full bg-linear-to-r from-purple-500 to-indigo-500 rounded-full"
+                    className="absolute top-0 left-0 h-full bg-(--accent-primary) rounded-full"
                     />
                 </div>
                 <span className="text-xs font-semibold text-(--text-primary) w-8 text-right">
